@@ -159,6 +159,7 @@ function Header({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => v
                   href={link.href}
                   className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
                   onClick={() => setMobileMenuOpen(false)}
+                  data-testid={`nav-link-${link.label.toLowerCase().replace(/\s/g, '-')}-mobile`}
                 >
                   {link.label}
                 </a>
