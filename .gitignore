@@ -4,3 +4,23 @@ dist
 server/public
 vite.config.ts.*
 *.tar.gz
+
+# Firebase
+.firebase/
+.firebaserc
+functions/dist
+functions/node_modules
+
+# Environment variables
+.env.local
+.env.*.local
+.env
+
+# IDE
+.vscode
+.idea
+
+# Build output
+.next/
+out/
+.local/

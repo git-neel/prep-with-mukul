@@ -1,0 +1,94 @@
+{
+  "colorScheme": "light",
+  "fonts": [
+    {
+      "family": "sans-serif",
+      "count": 114
+    },
+    {
+      "family": "Now",
+      "count": 49
+    },
+    {
+      "family": "TeXGyreAdventor",
+      "count": 38
+    },
+    {
+      "family": "Roboto",
+      "count": 18
+    },
+    {
+      "family": "Josefin Sans",
+      "count": 6
+    },
+    {
+      "family": "Allison",
+      "count": 3
+    },
+    {
+      "family": "-apple-system",
+      "count": 3
+    },
+    {
+      "family": "blinkmacsystemfont",
+      "count": 3
+    },
+    {
+      "family": "Segoe UI",
+      "count": 3
+    },
+    {
+      "family": "roboto",
+      "count": 3
+    }
+  ],
+  "colors": {
+    "primary": "#F2EBDE",
+    "accent": "#0474FC",
+    "background": "#FFFFFF",
+    "textPrimary": "#0474FC",
+    "link": "#0474FC"
+  },
+  "typography": {
+    "fontFamilies": {
+      "primary": "TeXGyreAdventor",
+      "heading": "Allison"
+    },
+    "fontStacks": {
+      "body": [
+        "TeXGyreAdventor",
+        "sans-serif"
+      ],
+      "heading": [
+        "Allison"
+      ],
+      "paragraph": [
+        "Now",
+        "sans-serif"
+      ]
+    },
+    "fontSizes": {
+      "h1": "40px",
+      "h2": "18px",
+      "body": "12px"
+    }
+  },
+  "spacing": {
+    "baseUnit": 4,
+    "borderRadius": "0px"
+  },
+  "components": {},
+  "images": {
+    "logo": null,
+    "favicon": "File saved at: attached_assets/favicon.webp",
+    "ogImage": "https://mastermath.in/wp-content/uploads/2025/09/online-math-classes.webp"
+  },
+  "__framework_hints": [
+    "WordPress 6.8.3"
+  ],
+  "confidence": {
+    "buttons": 0,
+    "colors": 0,
+    "overall": 0
+  }
+}

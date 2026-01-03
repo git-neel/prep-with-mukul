@@ -1,8 +1,9 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
-// Firebase Cloud Functions base URL
-// When deployed to Firebase Hosting, this will automatically use the correct URL
-const API_BASE = import.meta.env.VITE_API_BASE || "https://us-central1-YOUR_PROJECT_ID.cloudfunctions.net";
+// Next.js API base URL
+// In development: http://localhost:3000
+// In production: relative path
+const API_BASE = typeof window !== "undefined" ? "" : "";
 
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
@@ -16,14 +17,13 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
-  // If URL doesn't start with http, prepend the API base
+  // Use relative URLs for Next.js
   const fullUrl = url.startsWith("http") ? url : `${API_BASE}${url}`;
   
   const res = await fetch(fullUrl, {
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
     body: data ? JSON.stringify(data) : undefined,
-    mode: "cors",
   });
 
   await throwIfResNotOk(res);
