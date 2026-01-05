@@ -174,6 +174,7 @@ function Header({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => v
 
 // Hero Section Component
 function HeroSection() {
+  const [isHeroDialogOpen, setHeroDialogOpen] = useState(false);
   return (
     <section className="relative bg-slate-900 dark:bg-slate-950 text-white overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-primary/20 dark:from-slate-950 dark:via-slate-900 dark:to-primary/10" />
@@ -217,7 +218,7 @@ function HeroSection() {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Dialog>
+              <Dialog open={isHeroDialogOpen} onOpenChange={setHeroDialogOpen}>
                 <DialogTrigger asChild>
                   <Button size="lg" className="text-base px-8 py-6" data-testid="button-book-demo-hero">
                     <Calendar className="w-5 h-5 mr-2" />
@@ -231,7 +232,7 @@ function HeroSection() {
                       Fill in your details and we'll get back to you within 24 hours.
                     </DialogDescription>
                   </DialogHeader>
-                  <BookDemoForm />
+                  <BookDemoForm onSuccess={() => setHeroDialogOpen(false)} />
                 </DialogContent>
               </Dialog>
             </div>
@@ -442,6 +443,7 @@ function SchoolsSection() {
 
 // How It Works Section
 function HowItWorksSection() {
+  const [isHowDialogOpen, setHowDialogOpen] = useState(false);
   const points = [
     { text: "Small batches keep the student actively engaged", highlight: "Max. 7" },
     { text: "Work together with other kids with similar struggles.", highlight: null },
@@ -478,7 +480,7 @@ function HowItWorksSection() {
             </ul>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Dialog>
+              <Dialog open={isHowDialogOpen} onOpenChange={setHowDialogOpen}>
                 <DialogTrigger asChild>
                   <Button size="lg" data-testid="button-book-demo-how">
                     <Calendar className="w-5 h-5 mr-2" />
@@ -492,7 +494,7 @@ function HowItWorksSection() {
                       Fill in your details and we'll get back to you within 24 hours.
                     </DialogDescription>
                   </DialogHeader>
-                  <BookDemoForm />
+                  <BookDemoForm onSuccess={() => setHowDialogOpen(false)} />
                 </DialogContent>
               </Dialog>
               <p className="text-sm text-muted-foreground flex items-center">
@@ -520,6 +522,7 @@ function HowItWorksSection() {
 
 // Meet The Tutor Section
 function MeetTheTutorSection() {
+  const [isTutorDialogOpen, setTutorDialogOpen] = useState(false);
   const stats = [
     { label: "Nurturing", value: "Toppers Since 2013" },
     { label: "Students", value: "129+ Global Schools" },
@@ -560,7 +563,7 @@ function MeetTheTutorSection() {
               ))}
             </div>
             
-            <Dialog>
+            <Dialog open={isTutorDialogOpen} onOpenChange={setTutorDialogOpen}>
               <DialogTrigger asChild>
                 <Button size="lg" className="bg-white text-slate-900 hover:bg-gray-100" data-testid="button-book-demo-tutor">
                   <Calendar className="w-5 h-5 mr-2" />
@@ -574,7 +577,7 @@ function MeetTheTutorSection() {
                     Fill in your details and we'll get back to you within 24 hours.
                   </DialogDescription>
                 </DialogHeader>
-                <BookDemoForm />
+                <BookDemoForm onSuccess={() => setTutorDialogOpen(false)} />
               </DialogContent>
             </Dialog>
           </div>
@@ -790,6 +793,7 @@ function FAQSection() {
 
 // Final CTA Section
 function FinalCTASection() {
+  const [isFinalDialogOpen, setFinalDialogOpen] = useState(false);
   return (
     <section className="py-20 bg-primary text-primary-foreground">
       <div className="max-w-4xl mx-auto px-4 md:px-6 text-center space-y-8">
@@ -800,7 +804,7 @@ function FinalCTASection() {
           Join 1470+ students who have already transformed their Math performance. Book your free demo today and take the first step towards academic excellence.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Dialog>
+          <Dialog open={isFinalDialogOpen} onOpenChange={setFinalDialogOpen}>
             <DialogTrigger asChild>
               <Button size="lg" variant="secondary" className="text-primary" data-testid="button-book-demo-cta">
                 <Calendar className="w-5 h-5 mr-2" />
@@ -814,7 +818,7 @@ function FinalCTASection() {
                   Fill in your details and we'll get back to you within 24 hours.
                 </DialogDescription>
               </DialogHeader>
-              <BookDemoForm />
+              <BookDemoForm onSuccess={() => setFinalDialogOpen(false)} />
             </DialogContent>
           </Dialog>
           <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
@@ -892,7 +896,7 @@ function Footer() {
 }
 
 // Book Demo Form Component
-function BookDemoForm() {
+function BookDemoForm({ onSuccess }: { onSuccess?: () => void }) {
   const { toast } = useToast();
   
   const form = useForm<InsertDemoBooking>({
@@ -913,10 +917,13 @@ function BookDemoForm() {
     },
     onSuccess: () => {
       toast({
-        title: "Demo Booked Successfully!",
-        description: "We'll contact you within 24 hours to schedule your free demo.",
+        title: "Booking completed!",
+        description: "Booking is done, we'll contact your number as soon as possible.",
+        duration: 5000,
+        style: { backgroundColor: 'hsl(38 94% 50%)', color: 'black' },
       });
-      form.reset();
+      form.reset({ name: "", email: "", phone: "", grade: "10", message: "" });
+      onSuccess?.();
     },
     onError: () => {
       toast({
@@ -1003,7 +1010,7 @@ function BookDemoForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Message (Optional)</FormLabel>
+              <FormLabel>Message</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Tell us about your learning goals..."

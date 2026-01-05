@@ -10,22 +10,15 @@ export interface IStorage {
 }
 
 export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-  private demoBookings: Map<string, DemoBooking>;
-
-  constructor() {
-    this.users = new Map();
-    this.demoBookings = new Map();
-  }
+  private users: Map<string, User> = new Map();
+  private demoBookings: Map<string, DemoBooking> = new Map();
 
   async getUser(id: string): Promise<User | undefined> {
     return this.users.get(id);
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    return Array.from(this.users.values()).find((user) => user.username === username);
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
@@ -52,4 +45,5 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+// Use in-memory storage (data resets on server restart)
+export const storage: IStorage = new MemStorage();

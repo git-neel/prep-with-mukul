@@ -33,6 +33,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { insertDemoBookingSchema, type InsertDemoBooking } from "@shared/schema";
@@ -55,8 +61,6 @@ import {
   ChevronRight,
   Menu,
   X,
-  Sun,
-  Moon,
 } from "lucide-react";
 
 // Images will be served from public folder
@@ -101,13 +105,17 @@ function StarRating({ count = 5 }: { count?: number }) {
 }
 
 // Header Component
-function Header({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => void }) {
+function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   const navLinks = [
-    { href: "#course", label: "Course Flow" },
+    { href: "#learning-process", label: "How It Works" },
+    { href: "#courses", label: "Courses" },
     { href: "#achievers", label: "Past Achievers" },
+    { href: "#schools", label: "Schools" },
     { href: "#tutor", label: "Meet The Tutor" },
+    { href: "#why-learn", label: "Why Learn" },
+    { href: "#testimonials", label: "Testimonials" },
     { href: "#faq", label: "FAQs" },
   ];
   
@@ -116,7 +124,7 @@ function Header({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => v
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16 gap-4">
           <Link href="/" className="flex items-center gap-2">
-            <span className="font-handwritten text-4xl text-primary" data-testid="logo-text">Prep With Mukul</span>
+            <span className="text-4xl text-primary font-bold tracking-tight" style={{ fontFamily: "'Playfair Display', serif" }} data-testid="logo-text">Prep With Mukul</span>
           </Link>
           
           <nav className="hidden md:flex items-center gap-6">
@@ -133,15 +141,6 @@ function Header({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => v
           </nav>
           
           <div className="flex items-center gap-3">
-            <Button
-              size="icon"
-              variant="ghost"
-              onClick={toggleTheme}
-              data-testid="button-theme-toggle"
-            >
-              {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-            </Button>
-            
             <Button
               size="icon"
               variant="ghost"
@@ -178,54 +177,71 @@ function Header({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => v
 
 // Hero Section Component
 function HeroSection() {
+  const [isHeroDialogOpen, setHeroDialogOpen] = useState(false);
   return (
-    <section className="relative bg-blue-950 dark:bg-slate-950 text-white overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-blue-900 to-orange-500/20 dark:from-slate-950 dark:via-blue-900 dark:to-orange-500/10" />
+    <section className="relative bg-slate-950 text-white overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-900 to-orange-500/10" />
       
       <div className="relative max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <p className="text-sm text-orange-300 font-medium tracking-wide uppercase">
-              Online math tuition for class 10 CBSE
-            </p>
-            
-            <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold leading-tight" data-testid="text-hero-headline">
-              Assured boost in scores up to{" "}
-              <span className="text-orange-400">+15%</span> within three months.
+            <h1 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold leading-tight text-white" data-testid="text-hero-headline">
+              Online Maths Tuition for{" "}
+              <span className="text-orange-400">CBSE, ICSE, AP & SAT</span>
             </h1>
             
-            <div className="space-y-2 text-gray-300">
-              <p className="font-medium">+65% students I talk to,</p>
-              <ul className="space-y-1 text-sm md:text-base">
-                <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">&#9702;</span>
-                  Know concepts, but can't apply in exams.
+            <p className="text-xl md:text-2xl font-semibold text-gray-200 leading-relaxed">
+              Help Your Child Apply Maths Correctly in Exams:{" "}
+              <span className="text-orange-300">Not Just Memorise Formulas</span>
+            </p>
+            
+            <div className="space-y-4 text-gray-300">
+              <p className="text-base md:text-lg leading-relaxed">
+                Concept-based online Maths coaching for{" "}
+                <strong className="text-white">CBSE and ICSE students in India</strong>, and for{" "}
+                <strong className="text-white">AP Precalculus, AP Calculus, and SAT Math students worldwide</strong>.
+              </p>
+              
+              <p className="text-base md:text-lg leading-relaxed">
+                Designed for students who understand concepts but lose marks due to{" "}
+                <span className="text-orange-300">poor application</span>,{" "}
+                <span className="text-orange-300">exam pressure</span>, or{" "}
+                <span className="text-orange-300">lack of structured practice</span>.
+              </p>
+            </div>
+            
+            <div className="space-y-4 pt-4">
+              <h3 className="text-lg font-semibold text-white">
+                What students gain from this <span className="text-orange-400">CONCEPT-FIRST</span> approach:
+              </h3>
+              <ul className="space-y-3 text-gray-300">
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-base md:text-lg leading-relaxed">
+                    Clear conceptual understanding that reduces common mistakes
+                  </span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">&#9702;</span>
-                  Do silly mistakes when solving quicker.
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-base md:text-lg leading-relaxed">
+                    Exam-aligned practice that improves accuracy and confidence
+                  </span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">&#9702;</span>
-                  Want more timed practice tests as boards.
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-base md:text-lg leading-relaxed">
+                    Small batches or one-to-one sessions with consistent guidance throughout the exam cycle
+                  </span>
                 </li>
               </ul>
             </div>
             
-            <div className="flex items-start gap-2 text-gray-200">
-              <span className="text-primary text-lg">&#10148;</span>
-              <p>
-                Get online math classes with small-batches & assistance till{" "}
-                <strong className="text-white">final board-exam day.</strong>
-              </p>
-            </div>
-            
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Dialog>
+              <Dialog open={isHeroDialogOpen} onOpenChange={setHeroDialogOpen}>
                 <DialogTrigger asChild>
-                  <Button size="lg" className="text-base px-8 py-6" data-testid="button-book-demo-hero">
+                  <Button size="lg" className="text-base px-8 py-6" style={{ color: 'black' }} data-testid="button-book-demo-hero">
                     <Calendar className="w-5 h-5 mr-2" />
-                    Book my FREE Demo
+                    Book a FREE Orientation Call
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-md">
@@ -235,29 +251,34 @@ function HeroSection() {
                       Fill in your details and we'll get back to you within 24 hours.
                     </DialogDescription>
                   </DialogHeader>
-                  <BookDemoForm />
+                  <BookDemoForm onSuccess={() => setHeroDialogOpen(false)} />
                 </DialogContent>
               </Dialog>
             </div>
+            
+            <p className="text-sm text-gray-400 italic pt-2">
+              No sales pitch • Honest guidance • Right-fit only
+            </p>
             
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <div className="flex items-center gap-1">
                 <StarRating />
               </div>
-              <span className="text-sm text-gray-300">Join 1470+ league of achievers!</span>
+              <span className="text-sm text-gray-300">Join 120+ league of achievers!</span>
             </div>
           </div>
           
           <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-slate-900 to-blue-900">
               <img
                 src={heroImage}
                 alt="Student learning mathematics online"
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover mix-blend-lighten opacity-80"
                 data-testid="img-hero"
               />
+              <div className="absolute inset-0 bg-gradient-to-br from-slate-950/40 via-transparent to-orange-500/10 pointer-events-none" />
               
-              <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2">
+              <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2 z-10">
                 <div className="flex items-center gap-3">
                   <span className="text-2xl font-bold text-green-400">75%</span>
                   <ChevronRight className="w-4 h-4 text-white" />
@@ -273,12 +294,12 @@ function HeroSection() {
               </div>
             </div>
             
-            <div className="absolute -bottom-6 -right-6 bg-white dark:bg-slate-800 rounded-xl p-4 shadow-xl hidden lg:block">
+            <div className="absolute -bottom-6 -right-6 bg-white rounded-xl p-4 shadow-2xl border-2 border-orange-400 hidden lg:block z-20">
               <div className="text-center space-y-1">
-                <p className="text-xs text-muted-foreground">Excellent</p>
+                <p className="text-xs font-semibold text-gray-600">Excellent</p>
                 <StarRating />
-                <p className="text-xs text-muted-foreground">Based on 119+ reviews</p>
-                <p className="font-bold text-foreground">Google</p>
+                <p className="text-xs text-gray-600 font-medium">Based on 29 reviews</p>
+                <p className="font-bold text-blue-600 text-sm">Google</p>
               </div>
             </div>
           </div>
@@ -294,60 +315,52 @@ function HeroSection() {
   );
 }
 
-// Social Proof Section
-function SocialProofSection() {
-  return (
-    <section className="py-12 bg-background">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className="text-center space-y-4">
-          <Badge variant="secondary" className="text-sm px-4 py-1">
-            Student Achievers
-          </Badge>
-          <h2 className="font-heading text-2xl md:text-3xl font-bold" data-testid="text-achievers-headline">
-            from recent years.
-          </h2>
-          <p className="text-muted-foreground">Join the tribe of 1470+ Achievers!</p>
-        </div>
-      </div>
-    </section>
-  );
-}
 
-// Features Section
-function FeaturesSection() {
-  const features = [
+
+// Learning Process Section
+function LearningProcessSection() {
+  const learningCards = [
     {
-      icon: GraduationCap,
-      title: "Experienced Math Tutor",
-      description: "Comprehensive online math tuition classes are available for Class 10 students. We have experienced tutors who specialize in teaching math to Class 10 students.",
+      icon: BookOpen,
+      title: "Concept-Focused Math Instruction",
+      description: "Mathematics is taught with a strong focus on conceptual clarity rather than rote methods. Students first understand why a concept works before applying it, which helps reduce common mistakes and build confidence across topics.",
     },
     {
       icon: Target,
-      title: "Customized Lesson Plan",
-      description: "Customized lesson plans tailored to the learning pace and style of each student. One-on-one attention and support to help students achieve their academic goals.",
+      title: "Structured & Personalized Learning Plan",
+      description: "Each student follows a structured plan based on their level, pace, and exam requirements. Small batches and one-to-one options ensure focused attention, regular feedback, and targeted practice where needed.",
     },
     {
-      icon: Video,
-      title: "Interactive Session",
-      description: "Enjoy interactive sessions with engaging teaching methods to make learning math fun and practical with online tuition for class 10. Ace your Class 10 math exams with the best online tuition classes in town.",
+      icon: CheckCircle,
+      title: "Exam-Oriented Practice & Guidance",
+      description: "Sessions emphasize exam-style questions, guided problem-solving, and mistake analysis. Students learn how to apply concepts accurately under time pressure in tests and final exams.",
     },
   ];
   
   return (
-    <section id="course" className="py-20 bg-muted/30">
+    <section id="learning-process" className="py-20 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="text-center space-y-4 mb-12">
+          <Badge variant="secondary" className="text-sm px-4 py-1">
+            How It Works
+          </Badge>
+          <h2 className="font-heading text-2xl md:text-3xl font-bold" data-testid="text-learning-process-headline">
+            How the Learning Process Works?
+          </h2>
+        </div>
+        
         <div className="grid md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
+          {learningCards.map((card, index) => (
             <Card key={index} className="card-hover bg-card border-card-border">
               <CardContent className="p-6 space-y-4">
                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <feature.icon className="w-6 h-6 text-primary" />
+                  <card.icon className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="font-heading text-xl font-semibold" data-testid={`text-feature-title-${index}`}>
-                  {feature.title}
+                <h3 className="font-heading text-xl font-semibold" data-testid={`text-learning-card-title-${index}`}>
+                  {card.title}
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  {feature.description}
+                  {card.description}
                 </p>
               </CardContent>
             </Card>
@@ -389,7 +402,7 @@ function StudentAchieversSection() {
                   <User className="w-8 h-8 text-primary" />
                 </div>
                 <h4 className="font-semibold text-sm">{achiever.name}</h4>
-                <Badge className="bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20">
+                <Badge className="bg-green-500/10 text-green-400 border-green-500/20">
                   {achiever.score}
                 </Badge>
                 <p className="text-xs text-muted-foreground">{achiever.year}</p>
@@ -415,7 +428,7 @@ function SchoolsSection() {
   ];
   
   return (
-    <section className="py-20 bg-muted/30">
+    <section id="schools" className="py-20 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center space-y-4 mb-12">
           <Badge variant="secondary" className="text-sm px-4 py-1">
@@ -444,78 +457,109 @@ function SchoolsSection() {
   );
 }
 
-// How It Works Section
-function HowItWorksSection() {
-  const points = [
-    { text: "Small batches keep the student actively engaged", highlight: "Max. 7" },
-    { text: "Work together with other kids with similar struggles.", highlight: null },
-    { text: "Instant support - Inside the class. And outside.", highlight: "via WhatsApp & Call" },
-    { text: "Chapterwise assessments to monitor performance.", highlight: null },
+// Courses Section
+function CoursesSection() {
+  const courses = [
+    {
+      id: "cbse",
+      title: "CBSE / ICSE Maths",
+      description: "Classes follow the NCERT and ICSE syllabi closely, with emphasis on method, presentation, and exam-oriented problem-solving.",
+      points: [
+        "Concept-first explanations aligned with board textbooks",
+        "Focus on accuracy, steps, and common exam mistakes",
+        "Regular chapter-wise practice and assessments",
+        "Small batches or one-to-one support as required"
+      ],
+      icon: BookOpen,
+    },
+    {
+      id: "common-core",
+      title: "US Common Core Maths",
+      description: "Teaching is aligned with grade-level Common Core standards, with emphasis on reasoning and conceptual understanding.",
+      points: [
+        "Clear explanation of concepts and underlying logic",
+        "Multiple approaches to problem-solving",
+        "Focus on reasoning, not memorisation",
+        "Individual attention to address learning gaps"
+      ],
+      icon: School,
+    },
+    {
+      id: "sat",
+      title: "SAT Math",
+      description: "Preparation is structured around the actual SAT (Digital SAT) test format and question styles.",
+      points: [
+        "Review of core SAT Math concepts: Algebra, Advanced Math, Problem-Solving & Data Analysis, and Geometry & Trigonometry",
+        "Practice with exam-style questions and time management",
+        "Emphasis on accuracy under timed conditions",
+        "Small batch or one-to-one focused preparation"
+      ],
+      icon: Target,
+    },
+    {
+      id: "ap",
+      title: "AP Precalculus & AP Calculus",
+      description: "Classes focus on depth, clarity, and the level of thinking expected in AP exams.",
+      points: [
+        "Strong emphasis on functions, algebra, and calculus concepts",
+        "Step-by-step development of ideas and methods",
+        "Practice aligned with AP exam expectations",
+        "Support for coursework, quizzes, and test preparation"
+      ],
+      icon: GraduationCap,
+    },
   ];
   
   return (
-    <section className="py-20 bg-background">
+    <section id="courses" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <Badge variant="secondary" className="text-sm px-4 py-1">
-                How
-              </Badge>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold">
-                How these classes work
-              </h2>
-            </div>
-            
-            <ul className="space-y-4">
-              {points.map((point, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 shrink-0" />
-                  <span className="text-muted-foreground">
-                    {point.text}
-                    {point.highlight && (
-                      <strong className="text-foreground"> ({point.highlight})</strong>
-                    )}
-                  </span>
-                </li>
-              ))}
-            </ul>
-            
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button size="lg" data-testid="button-book-demo-how">
-                    <Calendar className="w-5 h-5 mr-2" />
-                    Book a FREE Demo
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-md">
-                  <DialogHeader>
-                    <DialogTitle className="font-heading text-xl">Book Your Free Demo</DialogTitle>
-                    <DialogDescription>
-                      Fill in your details and we'll get back to you within 24 hours.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <BookDemoForm />
-                </DialogContent>
-              </Dialog>
-              <p className="text-sm text-muted-foreground flex items-center">
-                Join 1470+ league of achievers!
-              </p>
-            </div>
-          </div>
-          
-          <div className="relative">
-            <Card className="overflow-hidden">
-              <CardContent className="p-0">
-                <img
-                  src={heroImage}
-                  alt="Online math tuition class"
-                  className="w-full h-auto object-cover"
-                />
-              </CardContent>
-            </Card>
-          </div>
+        <div className="text-center space-y-4 mb-12">
+          <Badge variant="secondary" className="text-sm px-4 py-1">
+            Courses
+          </Badge>
+          <h2 className="font-heading text-2xl md:text-3xl font-bold" data-testid="text-courses-headline">
+            Courses I teach?
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Each course follows the same core philosophy:{" "}
+            <span className="text-foreground font-semibold">concept clarity</span>,{" "}
+            <span className="text-foreground font-semibold">structured practice</span>,{" "}
+            <span className="text-foreground font-semibold">consistent guidance</span>
+          </p>
+        </div>
+        
+        <div className="max-w-4xl mx-auto">
+          <Accordion type="single" collapsible className="w-full">
+            {courses.map((course, index) => (
+              <AccordionItem key={course.id} value={course.id} className="border-b border-border/50 last:border-b-0">
+                <AccordionTrigger className="hover:no-underline py-6 group">
+                  <div className="flex items-center gap-4 text-left">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+                      <course.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <h3 className="font-heading text-lg font-semibold" data-testid={`text-course-title-${index}`}>
+                      {course.title}
+                    </h3>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="pb-6">
+                  <div className="space-y-4 pl-16">
+                    <p className="text-muted-foreground">
+                      {course.description}
+                    </p>
+                    <ul className="space-y-2">
+                      {course.points.map((point, pointIndex) => (
+                        <li key={pointIndex} className="flex items-start gap-2 text-sm">
+                          <CheckCircle className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                          <span className="text-muted-foreground">{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </div>
     </section>
@@ -524,15 +568,16 @@ function HowItWorksSection() {
 
 // Meet The Tutor Section
 function MeetTheTutorSection() {
+  const [isTutorDialogOpen, setTutorDialogOpen] = useState(false);
   const stats = [
-    { label: "Nurturing", value: "Toppers Since 2013" },
-    { label: "Students", value: "129+ Global Schools" },
-    { label: "Alumnus", value: "NIT Allahabad" },
-    { label: "Worked at", value: "Vedantu, Cuemath" },
+    { label: "Nurturing", value: "Toppers Since 2024" },
+    { label: "Students", value: "30+ Global" },
+    { label: "Alumnus", value: "Delhi University" },
+    { label: "Worked at", value: "Completely Online Tutoring" },
   ];
   
   return (
-    <section id="tutor" className="py-20 bg-slate-900 dark:bg-slate-950 text-white">
+    <section id="tutor" className="py-20 bg-slate-950 text-white">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
@@ -547,11 +592,16 @@ function MeetTheTutorSection() {
             
             <div className="space-y-4 text-gray-300">
               <p>
-                Hi, Mukul here, an online Maths tutor for grade 10 CBSE, taking{" "}
-                <strong className="text-orange-300">complete ownership till their final board-exam day.</strong>
+                Hi, Mukul here, an online Math tutor specializing in{" "}
+                <strong className="text-orange-300">CBSE, ICSE, US Common Core, SAT Math, and AP Calculus</strong>. I take{" "}
+                <strong className="text-orange-300">complete ownership</strong> of every student's learning journey,{" "}
+                from concept clarity to exam success.
               </p>
               <p>
-                Whether you want to improve your confidence in Math or need full course online tuition for CBSE class 10 or with your homework, I could help!
+                Whether you're aiming to ace your board exams, master Common Core concepts, prepare for competitive tests, or excel in AP courses, I combine{" "}
+                <strong className="text-orange-300">concept-first teaching</strong> with{" "}
+                <strong className="text-orange-300">structured practice</strong> and{" "}
+                <strong className="text-orange-300">consistent guidance</strong> to help you succeed.
               </p>
             </div>
             
@@ -564,11 +614,11 @@ function MeetTheTutorSection() {
               ))}
             </div>
             
-            <Dialog>
+            <Dialog open={isTutorDialogOpen} onOpenChange={setTutorDialogOpen}>
               <DialogTrigger asChild>
-                <Button size="lg" className="bg-white text-slate-900 hover:bg-gray-100" data-testid="button-book-demo-tutor">
+                <Button size="lg" className="bg-white hover:bg-gray-100" style={{ color: 'black' }} data-testid="button-book-demo-tutor">
                   <Calendar className="w-5 h-5 mr-2" />
-                  Book my FREE Demo
+                  Book a FREE Orientation Call
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-md">
@@ -578,7 +628,7 @@ function MeetTheTutorSection() {
                     Fill in your details and we'll get back to you within 24 hours.
                   </DialogDescription>
                 </DialogHeader>
-                <BookDemoForm />
+                <BookDemoForm onSuccess={() => setTutorDialogOpen(false)} />
               </DialogContent>
             </Dialog>
           </div>
@@ -594,21 +644,21 @@ function MeetTheTutorSection() {
                 />
               </div>
               
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-800 rounded-xl px-6 py-3 shadow-xl">
-                <div className="flex items-center gap-4 text-foreground">
+              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-orange-500 rounded-2xl px-8 py-4 shadow-2xl border border-orange-400/50">
+                <div className="flex items-center gap-6">
                   <div className="text-center">
-                    <p className="text-2xl font-bold text-primary"><AnimatedCounter target={5000} suffix="+" /></p>
-                    <p className="text-xs text-muted-foreground">Hours</p>
+                    <p className="text-3xl font-black" style={{ color: '#f97316' }}><AnimatedCounter target={1000} suffix="+" /></p>
+                    <p className="text-sm font-semibold tracking-wide" style={{ color: '#f97316' }}>Hours</p>
                   </div>
-                  <div className="w-px h-8 bg-border" />
+                  <div className="w-px h-10" style={{ backgroundColor: 'rgba(249, 115, 22, 0.5)' }} />
                   <div className="text-center">
-                    <p className="text-2xl font-bold text-primary"><AnimatedCounter target={1470} suffix="+" /></p>
-                    <p className="text-xs text-muted-foreground">Students</p>
+                    <p className="text-3xl font-black" style={{ color: '#f97316' }}><AnimatedCounter target={30} suffix="+" /></p>
+                    <p className="text-sm font-semibold tracking-wide" style={{ color: '#f97316' }}>Students</p>
                   </div>
-                  <div className="w-px h-8 bg-border" />
+                  <div className="w-px h-10" style={{ backgroundColor: 'rgba(249, 115, 22, 0.5)' }} />
                   <div className="text-center">
-                    <p className="text-2xl font-bold text-primary"><AnimatedCounter target={12} suffix="+" /></p>
-                    <p className="text-xs text-muted-foreground">Yrs Exp</p>
+                    <p className="text-3xl font-black" style={{ color: '#f97316' }}><AnimatedCounter target={2} suffix="+" /></p>
+                    <p className="text-sm font-semibold tracking-wide" style={{ color: '#f97316' }}>Yrs Exp</p>
                   </div>
                 </div>
               </div>
@@ -624,24 +674,24 @@ function MeetTheTutorSection() {
 function WhyLearnSection() {
   const reasons = [
     {
-      icon: Target,
+      icon: BookOpen,
       title: "1 Speciality. Math.",
-      description: "CBSE Grade 10 specialist; NO other Grade or Boards.",
+      description: "Expert in CBSE, ICSE, US Common Core, SAT Math, and AP Calculus. Focused on depth, not breadth.",
     },
     {
       icon: User,
       title: "1 Focus. You.",
-      description: "Focus on YOUR specific struggles. NOT generic ones.",
+      description: "Focus on YOUR specific struggles and learning pace. Personalized approach, not generic one-size-fits-all.",
     },
     {
       icon: Phone,
       title: "1 Point Of Contact. Me.",
-      description: "1 responsible P.O.C for entire course; Not a faceless brand.",
+      description: "Direct access to the tutor throughout your journey. Complete ownership from day one till exam success.",
     },
   ];
   
   return (
-    <section className="py-20 bg-background">
+    <section id="why-learn" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center space-y-4 mb-12">
           <Badge variant="secondary" className="text-sm px-4 py-1">
@@ -651,7 +701,7 @@ function WhyLearnSection() {
             Learn with Mukul Sir.
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Experience dedicated online coaching where students learn through engaging online classes for class 10, with complete support in mastering maths concepts. Total ownership till Board exam!
+            Experience dedicated online coaching with concept-first instruction, structured practice, and consistent guidance. Complete ownership till your exam success!
           </p>
         </div>
         
@@ -694,7 +744,7 @@ function TestimonialsSection() {
   ];
   
   return (
-    <section className="py-20 bg-muted/30">
+    <section id="testimonials" className="py-20 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center space-y-4 mb-12">
           <Badge variant="secondary" className="text-sm px-4 py-1">
@@ -717,7 +767,7 @@ function TestimonialsSection() {
                     </div>
                     <div>
                       <h4 className="font-semibold">{testimonial.name}</h4>
-                      <Badge className="bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20 text-xs">
+                      <Badge className="bg-green-500/10 text-green-400 border-green-500/20 text-xs">
                         {testimonial.score}
                       </Badge>
                     </div>
@@ -735,7 +785,7 @@ function TestimonialsSection() {
         
         <div className="text-center mt-8">
           <Button variant="outline" data-testid="button-see-testimonials">
-            See 119+ testimonials
+            See 29 testimonials
             <ChevronRight className="w-4 h-4 ml-1" />
           </Button>
         </div>
@@ -748,20 +798,20 @@ function TestimonialsSection() {
 function FAQSection() {
   const faqs = [
     {
-      question: "What grades do you teach?",
-      answer: "I specialize exclusively in Class 10 CBSE Mathematics. This focused approach allows me to provide the best possible guidance for board exam preparation.",
+      question: "Which courses and grades do you teach?",
+      answer: "I teach CBSE, ICSE (Classes 6-10), US Common Core Math, SAT Math, and AP Precalculus & AP Calculus. Each course follows the same concept-first, structured practice approach regardless of level.",
     },
     {
-      question: "What is the batch size?",
-      answer: "Maximum 7 students per batch. This ensures personalized attention and active participation from each student.",
+      question: "What is the teaching approach?",
+      answer: "Concept-first instruction with emphasis on understanding why concepts work. Combined with structured practice, exam-style questions, and consistent guidance throughout your learning journey.",
     },
     {
-      question: "How do I join a demo class?",
-      answer: "Simply click on 'Book my FREE Demo' button and fill in your details. I'll reach out to schedule a convenient time for you.",
+      question: "What's the batch size and support structure?",
+      answer: "Small batches (max 7 students) or one-to-one options available based on your preference. You get WhatsApp/Call support outside class hours and direct access to me for all your doubts.",
     },
     {
-      question: "What platform do you use for classes?",
-      answer: "Classes are conducted on Zoom/Google Meet with interactive whiteboards. Students also get WhatsApp support for doubts outside class hours.",
+      question: "How do I get started?",
+      answer: "Click 'Book a FREE Orientation Call' to schedule a 30-minute demo where we discuss your goals, current level, and how I can help you succeed.",
     },
   ];
   
@@ -794,21 +844,22 @@ function FAQSection() {
 
 // Final CTA Section
 function FinalCTASection() {
+  const [isFinalDialogOpen, setFinalDialogOpen] = useState(false);
   return (
-    <section className="py-20 bg-primary text-primary-foreground">
+    <section className="py-20 bg-slate-950 text-white">
       <div className="max-w-4xl mx-auto px-4 md:px-6 text-center space-y-8">
-        <h2 className="font-heading text-2xl md:text-4xl font-bold">
+        <h2 className="font-heading text-3xl md:text-4xl font-bold">
           Ready to boost your Math scores?
         </h2>
         <p className="text-lg opacity-90 max-w-2xl mx-auto">
-          Join 1470+ students who have already transformed their Math performance. Book your free demo today and take the first step towards academic excellence.
+          Join <span className="text-orange-400 font-semibold text-xl">30+ students</span> who have already transformed their Math performance. Book your orientation call today and take the first step towards exam success.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Dialog>
+          <Dialog open={isFinalDialogOpen} onOpenChange={setFinalDialogOpen}>
             <DialogTrigger asChild>
-              <Button size="lg" variant="secondary" className="text-primary" data-testid="button-book-demo-cta">
+              <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold" data-testid="button-book-demo-cta">
                 <Calendar className="w-5 h-5 mr-2" />
-                Book my FREE Demo
+                Book an Orientation Call
               </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-md">
@@ -818,17 +869,24 @@ function FinalCTASection() {
                   Fill in your details and we'll get back to you within 24 hours.
                 </DialogDescription>
               </DialogHeader>
-              <BookDemoForm />
+              <BookDemoForm onSuccess={() => setFinalDialogOpen(false)} />
             </DialogContent>
           </Dialog>
-          <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
+          <Button 
+            size="lg" 
+            variant="ghost" 
+            className="border-0 shadow-md"
+            style={{ backgroundColor: '#25D366', color: 'white' }}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#20BA5A'}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#25D366'}
+          >
             <MessageCircle className="w-5 h-5 mr-2" />
             Chat on WhatsApp
           </Button>
         </div>
         <div className="flex items-center justify-center gap-2">
           <StarRating />
-          <span className="text-sm opacity-75">4.9/5 rating from 119+ reviews</span>
+          <span className="text-sm opacity-75">4.9/5 rating from 29 reviews</span>
         </div>
       </div>
     </section>
@@ -838,22 +896,26 @@ function FinalCTASection() {
 // Footer Component
 function Footer() {
   return (
-    <footer className="bg-slate-900 dark:bg-slate-950 text-gray-300 py-12">
+    <footer className="bg-slate-950 text-gray-300 py-12">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <span className="font-handwritten text-4xl text-white">Prep With Mukul</span>
+            <span className="text-4xl text-white font-bold tracking-tight" style={{ fontFamily: "'Playfair Display', serif" }}>Prep With Mukul</span>
             <p className="text-sm">
-              Online math tuition for Class 10 CBSE with personalized attention and guaranteed score improvement.
+              Online math tuition for CBSE, ICSE, US Common Core, SAT Math, and AP Calculus with personalized attention and concept-first teaching.
             </p>
           </div>
           
-          <div>
+          <div className="md:col-span-2">
             <h4 className="font-semibold text-white mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#course" className="hover:text-white transition-colors">Course Flow</a></li>
+            <ul className="grid grid-cols-2 gap-x-8 gap-y-2 text-sm">
+              <li><a href="#learning-process" className="hover:text-white transition-colors">How It Works</a></li>
+              <li><a href="#courses" className="hover:text-white transition-colors">Courses</a></li>
               <li><a href="#achievers" className="hover:text-white transition-colors">Past Achievers</a></li>
+              <li><a href="#schools" className="hover:text-white transition-colors">Schools</a></li>
               <li><a href="#tutor" className="hover:text-white transition-colors">Meet The Tutor</a></li>
+              <li><a href="#why-learn" className="hover:text-white transition-colors">Why Learn</a></li>
+              <li><a href="#testimonials" className="hover:text-white transition-colors">Testimonials</a></li>
               <li><a href="#faq" className="hover:text-white transition-colors">FAQs</a></li>
             </ul>
           </div>
@@ -863,7 +925,7 @@ function Footer() {
             <ul className="space-y-2 text-sm">
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4" />
-                +91 98765 43210
+                +91 9807612635
               </li>
               <li className="flex items-center gap-2">
                 <MessageCircle className="w-4 h-4" />
@@ -877,11 +939,7 @@ function Footer() {
             <ul className="space-y-2 text-sm">
               <li className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
-                Mon - Sat: 4PM - 9PM
-              </li>
-              <li className="flex items-center gap-2">
-                <Clock className="w-4 h-4" />
-                Sun: By Appointment
+                7 AM - 11 PM all day
               </li>
             </ul>
           </div>
@@ -896,7 +954,7 @@ function Footer() {
 }
 
 // Book Demo Form Component
-function BookDemoForm() {
+function BookDemoForm({ onSuccess }: { onSuccess?: () => void }) {
   const { toast } = useToast();
   
   const form = useForm<InsertDemoBooking>({
@@ -905,7 +963,7 @@ function BookDemoForm() {
       name: "",
       email: "",
       phone: "",
-      grade: "10",
+      grade: "cbse-icse-10",
       message: "",
     },
   });
@@ -917,10 +975,13 @@ function BookDemoForm() {
     },
     onSuccess: () => {
       toast({
-        title: "Demo Booked Successfully!",
-        description: "We'll contact you within 24 hours to schedule your free demo.",
+        title: "Booking completed!",
+        description: "Booking is done, we'll contact your number as soon as possible.",
+        duration: 5000,
+        style: { backgroundColor: 'hsl(38 94% 50%)', color: 'black' },
       });
-      form.reset();
+      form.reset({ name: "", email: "", phone: "", grade: "cbse-icse-10", message: "" });
+      onSuccess?.();
     },
     onError: () => {
       toast({
@@ -973,7 +1034,7 @@ function BookDemoForm() {
             <FormItem>
               <FormLabel>Phone</FormLabel>
               <FormControl>
-                <Input placeholder="+91 98765 43210" {...field} data-testid="input-phone" />
+                <Input placeholder="+91 9807612635" {...field} data-testid="input-phone" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -993,8 +1054,13 @@ function BookDemoForm() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="9">Class 9</SelectItem>
-                  <SelectItem value="10">Class 10</SelectItem>
+                  <SelectItem value="cbse-icse-6-8">CBSE / ICSE (Classes 6-8)</SelectItem>
+                  <SelectItem value="cbse-icse-9">CBSE / ICSE (Class 9)</SelectItem>
+                  <SelectItem value="cbse-icse-10">CBSE / ICSE (Class 10)</SelectItem>
+                  <SelectItem value="us-common-core">US Common Core Math</SelectItem>
+                  <SelectItem value="sat-math">SAT Math</SelectItem>
+                  <SelectItem value="ap-precalculus">AP Precalculus</SelectItem>
+                  <SelectItem value="ap-calculus">AP Calculus</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -1007,7 +1073,7 @@ function BookDemoForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Message (Optional)</FormLabel>
+              <FormLabel>Message</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Tell us about your learning goals..."
@@ -1022,8 +1088,8 @@ function BookDemoForm() {
           )}
         />
         
-        <Button type="submit" className="w-full" disabled={mutation.isPending} data-testid="button-submit-demo">
-          {mutation.isPending ? "Submitting..." : "Book Free Demo"}
+        <Button type="submit" className="w-full" style={{ color: 'black' }} disabled={mutation.isPending} data-testid="button-submit-demo">
+          {mutation.isPending ? "Submitting..." : "Book a FREE Orientation Call"}
         </Button>
       </form>
     </Form>
@@ -1032,34 +1098,19 @@ function BookDemoForm() {
 
 // Main Home Page Component
 export default function Home() {
-  const [isDark, setIsDark] = useState(false);
-  
   useEffect(() => {
-    const stored = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const shouldBeDark = stored === "dark" || (!stored && prefersDark);
-    
-    setIsDark(shouldBeDark);
-    document.documentElement.classList.toggle("dark", shouldBeDark);
+    document.documentElement.classList.add("dark");
   }, []);
-  
-  const toggleTheme = () => {
-    const newDark = !isDark;
-    setIsDark(newDark);
-    document.documentElement.classList.toggle("dark", newDark);
-    localStorage.setItem("theme", newDark ? "dark" : "light");
-  };
   
   return (
     <div className="min-h-screen bg-background">
-      <Header isDark={isDark} toggleTheme={toggleTheme} />
+      <Header />
       <main>
         <HeroSection />
-        <SocialProofSection />
-        <FeaturesSection />
+        <LearningProcessSection />
+        <CoursesSection />
         <StudentAchieversSection />
         <SchoolsSection />
-        <HowItWorksSection />
         <MeetTheTutorSection />
         <WhyLearnSection />
         <TestimonialsSection />

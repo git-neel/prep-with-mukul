@@ -17,7 +17,7 @@ export const insertDemoBookingSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   phone: z.string().min(10, "Please enter a valid phone number"),
   grade: z.string().min(1, "Please select a grade"),
-  message: z.string().optional().nullable(),
+  message: z.string().min(5, "Please share a brief learning goal"),
 });
 
 export type InsertDemoBooking = z.infer<typeof insertDemoBookingSchema>;
