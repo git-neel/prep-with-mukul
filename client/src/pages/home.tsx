@@ -43,7 +43,6 @@ import {
   CheckCircle,
   Play,
   Phone,
-  MessageCircle,
   Award,
   Target,
   User,
@@ -95,6 +94,19 @@ function StarRating({ count = 5 }: { count?: number }) {
     </div>
   );
 }
+
+// WhatsApp brand icon (SVG)
+function WhatsAppIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false" {...props}>
+      <path
+        fill="currentColor"
+        d="M16.002 6.003a9.99 9.99 0 0 0-8.54 15.028l-.887 3.25 3.34-.876A9.995 9.995 0 1 0 16.002 6zm0 17.6a7.6 7.6 0 1 1 0-15.2 7.6 7.6 0 0 1 0 15.2zm4.16-5.664c-.227-.113-1.34-.66-1.548-.736-.208-.075-.36-.113-.511.114-.151.226-.586.736-.718.888-.132.151-.264.17-.49.057-.227-.114-.958-.353-1.824-1.126-.674-.602-1.128-1.346-1.26-1.573-.132-.226-.014-.349.099-.461.101-.1.227-.264.34-.396.113-.132.151-.226.227-.377.075-.151.038-.283-.019-.396-.057-.113-.51-1.226-.698-1.68-.184-.442-.372-.382-.511-.39-.132-.008-.283-.01-.434-.01-.151 0-.396.057-.604.283-.208.226-.792.773-.792 1.885 0 1.112.812 2.187.925 2.339.113.151 1.6 2.442 3.878 3.423 2.278.98 2.278.654 2.689.613.412-.038 1.34-.547 1.529-1.075.189-.528.189-.982.132-1.075-.057-.094-.208-.151-.434-.264z"
+      />
+    </svg>
+  );
+}
+
 
 // Header Component
 function Header({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => void }) {
@@ -794,6 +806,10 @@ function FAQSection() {
 // Final CTA Section
 function FinalCTASection() {
   const [isFinalDialogOpen, setFinalDialogOpen] = useState(false);
+  const [isWhatsAppDialogOpen, setWhatsAppDialogOpen] = useState(false);
+  const whatsappNumber = "+919807612635";
+  const whatsappLink = `https://wa.me/919807612635?text=${encodeURIComponent("Hi Mukul, I'd like to book an orientation call.")}`;
+  const whatsappQr = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(whatsappLink)}`;
   return (
     <section className="py-20 bg-primary text-primary-foreground">
       <div className="max-w-4xl mx-auto px-4 md:px-6 text-center space-y-8">
@@ -821,10 +837,31 @@ function FinalCTASection() {
               <BookDemoForm onSuccess={() => setFinalDialogOpen(false)} />
             </DialogContent>
           </Dialog>
-          <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
-            <MessageCircle className="w-5 h-5 mr-2" />
-            Chat on WhatsApp
-          </Button>
+          <Dialog open={isWhatsAppDialogOpen} onOpenChange={setWhatsAppDialogOpen}>
+            <DialogTrigger asChild>
+              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                <WhatsAppIcon className="w-5 h-5 mr-2" />
+                Chat on WhatsApp
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-md">
+              <DialogHeader>
+                <DialogTitle className="font-heading text-xl">Scan to WhatsApp</DialogTitle>
+                <DialogDescription>
+                  Scan the QR to message Mukul on WhatsApp or tap the button below.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="flex flex-col items-center gap-4 py-2">
+                <img src={whatsappQr} alt="WhatsApp QR code" className="w-56 h-56 rounded-lg border border-gray-200" />
+                <p className="text-sm text-gray-500">Number: {whatsappNumber}</p>
+                <Button asChild className="bg-[#25D366] hover:bg-[#20BA5A] text-black w-full">
+                  <a href={whatsappLink} target="_blank" rel="noreferrer">
+                    Open WhatsApp Chat
+                  </a>
+                </Button>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
         <div className="flex items-center justify-center gap-2">
           <StarRating />
@@ -832,6 +869,46 @@ function FinalCTASection() {
         </div>
       </div>
     </section>
+  );
+}
+
+// Floating WhatsApp Button
+function FloatingWhatsAppButton() {
+  const [isOpen, setIsOpen] = useState(false);
+  const whatsappNumber = "+919807612635";
+  const whatsappLink = `https://wa.me/919807612635?text=${encodeURIComponent("Hi Mukul, I'd like to book an orientation call.")}`;
+  const whatsappQr = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(whatsappLink)}`;
+  return (
+    <div className="fixed bottom-6 right-6 z-50">
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogTrigger asChild>
+          <button
+            aria-label="Chat on WhatsApp"
+            className="rounded-full shadow-lg border border-green-700/30"
+            style={{ backgroundColor: '#25D366', color: 'black', padding: '14px' }}
+          >
+            <WhatsAppIcon className="w-6 h-6" />
+          </button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="font-heading text-xl">Scan to WhatsApp</DialogTitle>
+            <DialogDescription>
+              Scan the QR to message Mukul on WhatsApp or tap the button below.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex flex-col items-center gap-4 py-2">
+            <img src={whatsappQr} alt="WhatsApp QR code" className="w-56 h-56 rounded-lg border border-gray-200" />
+            <p className="text-sm text-gray-500">Number: {whatsappNumber}</p>
+            <Button asChild className="bg-[#25D366] hover:bg-[#20BA5A] text-black w-full">
+              <a href={whatsappLink} target="_blank" rel="noreferrer">
+                Open WhatsApp Chat
+              </a>
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </div>
   );
 }
 
@@ -866,7 +943,7 @@ function Footer() {
                 +91 98765 43210
               </li>
               <li className="flex items-center gap-2">
-                <MessageCircle className="w-4 h-4" />
+                <WhatsAppIcon className="w-4 h-4" />
                 WhatsApp Support
               </li>
             </ul>
@@ -1070,6 +1147,7 @@ export default function Home() {
         <FinalCTASection />
       </main>
       <Footer />
+      <FloatingWhatsAppButton />
     </div>
   );
 }

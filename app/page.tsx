@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,6 +10,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { ImageSlider } from "@/components/ImageSlider";
+import { VideoTestimonialSlider } from "@/components/VideoTestimonialSlider";
 import {
   Form,
   FormControl,
@@ -45,27 +47,26 @@ import { insertDemoBookingSchema, type InsertDemoBooking } from "@shared/schema"
 import {
   Star,
   Calendar,
-  Users,
   BookOpen,
   GraduationCap,
-  CheckCircle,
-  Play,
-  Phone,
+  ChevronRight,
+  Menu,
+  X,
   MessageCircle,
-  Award,
+  CheckCircle,
   Target,
   User,
   Clock,
   School,
-  Video,
-  ChevronRight,
-  Menu,
-  X,
+  Phone,
+  Play,
 } from "lucide-react";
 
 // Images will be served from public folder
 const heroImage = "/attached_assets/generated_images/student_studying_math_online.png";
 const tutorImage = "/attached_assets/generated_images/professional_tutor_portrait.png";
+const whatsappIcon = "/attached_assets/WhatsApp.svg";
+const calendarIcon = "/attached_assets/calendar-orange.svg";
 
 // Stats Counter Component
 function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: string }) {
@@ -372,44 +373,38 @@ function LearningProcessSection() {
 }
 
 // Student Achievers Section
-function StudentAchieversSection() {
-  const achievers = [
-    { name: "Priya S.", score: "98/100", year: "2024" },
-    { name: "Arjun K.", score: "95/100", year: "2024" },
-    { name: "Sneha M.", score: "97/100", year: "2024" },
-    { name: "Rahul P.", score: "94/100", year: "2024" },
-    { name: "Ananya R.", score: "99/100", year: "2024" },
-    { name: "Vikram S.", score: "96/100", year: "2024" },
+// Image Slider Section
+function ImageSliderSection() {
+  const images = [
+    { src: "/attached_assets/ayesha.jpeg", caption: "Student engaged in concept mastery" },
+    { src: "/attached_assets/peter.jpeg", caption: "Live problem-solving session" },
+    { src: "/attached_assets/student.jpeg", caption: "Interactive learning environment" },
+    { src: "/attached_assets/aadit.jpeg", caption: "One-on-one focused guidance" },
+    { src: "/attached_assets/Mishika.jpeg", caption: "Concept clarity in action" },
+    { src: "/attached_assets/divina.jpeg", caption: "Structured exam practice" },
+    { src: "/attached_assets/mamtaRitika.jpeg", caption: "Student progress milestone" },
+    { src: "/attached_assets/PeterReview.jpeg", caption: "Positive student feedback" },
+    { src: "/attached_assets/RitikaResult.jpeg", caption: "Success story" },
+    { src: "/attached_assets/sampleClass.jpeg", caption: "Batch class in session" },
+    { src: "/attached_assets/SampleClass7th.jpeg", caption: "Engaging young learners" },
   ];
-  
+
   return (
-    <section id="achievers" className="py-20 bg-background">
+    <section id="classroom" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center space-y-4 mb-12">
           <Badge variant="secondary" className="text-sm px-4 py-1">
-            Why
+            Experience
           </Badge>
-          <h2 className="font-heading text-2xl md:text-3xl font-bold" data-testid="text-top-performers">
-            Prep With Mukul's 2024 Top Performers
+          <h2 className="font-heading text-2xl md:text-3xl font-bold">
+            Inside the Classroom Moments with Mukul Sir
           </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Real screenshots from live online teaching sessions. Click any image to view in detail.
+          </p>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {achievers.map((achiever, index) => (
-            <Card key={index} className="card-hover overflow-hidden bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
-              <CardContent className="p-4 text-center space-y-2">
-                <div className="w-16 h-16 mx-auto rounded-full bg-primary/20 flex items-center justify-center">
-                  <User className="w-8 h-8 text-primary" />
-                </div>
-                <h4 className="font-semibold text-sm">{achiever.name}</h4>
-                <Badge className="bg-green-500/10 text-green-400 border-green-500/20">
-                  {achiever.score}
-                </Badge>
-                <p className="text-xs text-muted-foreground">{achiever.year}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <ImageSlider images={images} />
       </div>
     </section>
   );
@@ -418,13 +413,15 @@ function StudentAchieversSection() {
 // Schools Section
 function SchoolsSection() {
   const schools = [
-    "Yuvabharti School, Singapore",
-    "Amity International, Noida",
-    "GEMS International, UAE",
-    "DPS Mathura Road, Delhi",
-    "National Public School, Bangalore",
-    "Our Own Indian School, UAE",
-    "Indian School, Oman",
+    "MV High School, California, USA",
+    "Chancellor High School, Spotsylvania County, Virginia, USA",
+    "Signature School, Indiana, USA",
+    "BASIS, Texas, USA",
+    "GEMS Our Own English High School, Dubai",
+    "Delhi Public School, Varanasi, India",
+    "Delhi Public School, Bhopal, India",
+    "Sunbeam School, Varanasi",
+    "Maneckji Cooper Education Trust School, Mumbai",
   ];
   
   return (
@@ -437,7 +434,7 @@ function SchoolsSection() {
           <h2 className="font-heading text-2xl md:text-3xl font-bold">
             School students from
           </h2>
-          <p className="text-primary font-medium">129+ UAE, Singapore, Indian Schools</p>
+          <p className="text-primary font-medium">120+ UAE, Singapore, Indian Schools</p>
         </div>
         
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -570,10 +567,10 @@ function CoursesSection() {
 function MeetTheTutorSection() {
   const [isTutorDialogOpen, setTutorDialogOpen] = useState(false);
   const stats = [
-    { label: "Nurturing", value: "Toppers Since 2024" },
-    { label: "Students", value: "30+ Global" },
-    { label: "Alumnus", value: "Delhi University" },
-    { label: "Worked at", value: "Completely Online Tutoring" },
+    { label: "Teaching Approach", value: "Concept Clarity & Exam Application" },
+    { label: "Students From", value: "India · UAE · USA · UK" },
+    { label: "Courses Taught", value: "CBSE · ICSE · AP · SAT · US Common Core" },
+    { label: "Class Format", value: "Small Batches & One-to-One" },
   ];
   
   return (
@@ -592,16 +589,15 @@ function MeetTheTutorSection() {
             
             <div className="space-y-4 text-gray-300">
               <p>
-                Hi, Mukul here, an online Math tutor specializing in{" "}
-                <strong className="text-orange-300">CBSE, ICSE, US Common Core, SAT Math, and AP Calculus</strong>. I take{" "}
-                <strong className="text-orange-300">complete ownership</strong> of every student's learning journey,{" "}
-                from concept clarity to exam success.
+                Hi, I'm Mukul, an online Mathematics tutor and a{" "}
+                <strong className="text-orange-300">Delhi University alumnus</strong>, working with{" "}
+                <strong className="text-orange-300">CBSE, ICSE, AP, SAT, and US Common Core</strong> students.
+                I focus on building strong fundamentals, clear thinking, and exam-ready problem-solving rather than shortcuts or memorisation.
               </p>
               <p>
-                Whether you're aiming to ace your board exams, master Common Core concepts, prepare for competitive tests, or excel in AP courses, I combine{" "}
-                <strong className="text-orange-300">concept-first teaching</strong> with{" "}
-                <strong className="text-orange-300">structured practice</strong> and{" "}
-                <strong className="text-orange-300">consistent guidance</strong> to help you succeed.
+                To make this effective in practice, I work closely with students in{" "}
+                <strong className="text-orange-300">small batches or one-to-one sessions</strong>, taking ownership of their progress:{" "}
+                From identifying learning gaps to helping them apply concepts confidently in exams.
               </p>
             </div>
             
@@ -647,17 +643,17 @@ function MeetTheTutorSection() {
               <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-orange-500 rounded-2xl px-8 py-4 shadow-2xl border border-orange-400/50">
                 <div className="flex items-center gap-6">
                   <div className="text-center">
-                    <p className="text-3xl font-black" style={{ color: '#f97316' }}><AnimatedCounter target={1000} suffix="+" /></p>
+                    <p className="text-3xl font-black" style={{ color: '#f97316' }}><AnimatedCounter target={2000} suffix="+" /></p>
                     <p className="text-sm font-semibold tracking-wide" style={{ color: '#f97316' }}>Hours</p>
                   </div>
                   <div className="w-px h-10" style={{ backgroundColor: 'rgba(249, 115, 22, 0.5)' }} />
                   <div className="text-center">
-                    <p className="text-3xl font-black" style={{ color: '#f97316' }}><AnimatedCounter target={30} suffix="+" /></p>
+                    <p className="text-3xl font-black" style={{ color: '#f97316' }}><AnimatedCounter target={50} suffix="+" /></p>
                     <p className="text-sm font-semibold tracking-wide" style={{ color: '#f97316' }}>Students</p>
                   </div>
                   <div className="w-px h-10" style={{ backgroundColor: 'rgba(249, 115, 22, 0.5)' }} />
                   <div className="text-center">
-                    <p className="text-3xl font-black" style={{ color: '#f97316' }}><AnimatedCounter target={2} suffix="+" /></p>
+                    <p className="text-3xl font-black" style={{ color: '#f97316' }}><AnimatedCounter target={4} suffix="+" /></p>
                     <p className="text-sm font-semibold tracking-wide" style={{ color: '#f97316' }}>Yrs Exp</p>
                   </div>
                 </div>
@@ -675,18 +671,18 @@ function WhyLearnSection() {
   const reasons = [
     {
       icon: BookOpen,
-      title: "1 Speciality. Math.",
-      description: "Expert in CBSE, ICSE, US Common Core, SAT Math, and AP Calculus. Focused on depth, not breadth.",
+      title: "One Focus. Maths.",
+      description: "Concept-first teaching across CBSE, ICSE, AP, SAT, and US Common Core: no shortcuts, no dilution.",
     },
     {
       icon: User,
-      title: "1 Focus. You.",
-      description: "Focus on YOUR specific struggles and learning pace. Personalized approach, not generic one-size-fits-all.",
+      title: "Individual Learning Approach",
+      description: "Teaching is adapted to each student's gaps, pace, and problem-solving approach, rather than following a fixed script.",
     },
     {
       icon: Phone,
-      title: "1 Point Of Contact. Me.",
-      description: "Direct access to the tutor throughout your journey. Complete ownership from day one till exam success.",
+      title: "Single Teacher Model",
+      description: "All classes are taught by me from start to finish, ensuring continuity, clarity, and consistent guidance.",
     },
   ];
   
@@ -698,10 +694,11 @@ function WhyLearnSection() {
             Why
           </Badge>
           <h2 className="font-heading text-2xl md:text-3xl font-bold">
-            Learn with Mukul Sir.
+            Learn with Mukul sir
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Experience dedicated online coaching with concept-first instruction, structured practice, and consistent guidance. Complete ownership till your exam success!
+            Dedicated online Maths coaching focused on concept clarity, structured practice, and exam-ready problem-solving.
+            Taught in small batches or one-to-one, with complete ownership of the learning process: from fundamentals to confident exam application.
           </p>
         </div>
         
@@ -724,23 +721,13 @@ function WhyLearnSection() {
 }
 
 // Testimonials Section
+// Testimonials Section
 function TestimonialsSection() {
-  const testimonials = [
-    {
-      name: "Mudit S.",
-      score: "90/100",
-      quote: "Happy to find a tutor who could understand my child's psychology",
-    },
-    {
-      name: "Pranay",
-      score: "95/100",
-      quote: "My son continued with him for 2 years straight",
-    },
-    {
-      name: "Anvita",
-      score: "99/100",
-      quote: "He was available to answer all my silly queries",
-    },
+  const videoTestimonials = [
+    { src: "/attached_assets/MitishaFeedback1.mp4", studentName: "Mishika's experience" },
+    { src: "/attached_assets/student2VideoFeedback.mp4", studentName: "Student Feedback" },
+    { src: "/attached_assets/Student3VideoFeedback.mp4", studentName: "Student Review" },
+    { src: "/attached_assets/Student4VideoFeedback.mp4", studentName: "Student Success" },
   ];
   
   return (
@@ -753,42 +740,10 @@ function TestimonialsSection() {
           <h2 className="font-heading text-2xl md:text-3xl font-bold">
             Students love Prep With Mukul.
           </h2>
-          <p className="text-muted-foreground">Achieving results with personalized classes.</p>
+          <p className="text-muted-foreground">Hear directly from students about their learning journey.</p>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <Card key={index} className="card-hover">
-              <CardContent className="p-6 space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                      <User className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold">{testimonial.name}</h4>
-                      <Badge className="bg-green-500/10 text-green-400 border-green-500/20 text-xs">
-                        {testimonial.score}
-                      </Badge>
-                    </div>
-                  </div>
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Play className="w-5 h-5 text-primary ml-0.5" />
-                  </div>
-                </div>
-                <StarRating />
-                <p className="text-muted-foreground text-sm italic">"{testimonial.quote}"</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-        
-        <div className="text-center mt-8">
-          <Button variant="outline" data-testid="button-see-testimonials">
-            See 29 testimonials
-            <ChevronRight className="w-4 h-4 ml-1" />
-          </Button>
-        </div>
+        <VideoTestimonialSlider videos={videoTestimonials} />
       </div>
     </section>
   );
@@ -798,20 +753,36 @@ function TestimonialsSection() {
 function FAQSection() {
   const faqs = [
     {
-      question: "Which courses and grades do you teach?",
-      answer: "I teach CBSE, ICSE (Classes 6-10), US Common Core Math, SAT Math, and AP Precalculus & AP Calculus. Each course follows the same concept-first, structured practice approach regardless of level.",
+      question: "How are classes structured?",
+      answer: "Classes are conducted in small batches or one-to-one, depending on the requirement. The focus is on clear explanation, guided problem-solving, and consistent practice.",
     },
     {
-      question: "What is the teaching approach?",
-      answer: "Concept-first instruction with emphasis on understanding why concepts work. Combined with structured practice, exam-style questions, and consistent guidance throughout your learning journey.",
+      question: "Do you personally teach all classes?",
+      answer: "Yes. I teach every class myself. There are no substitute teachers, assistants, or handovers at any stage.",
     },
     {
-      question: "What's the batch size and support structure?",
-      answer: "Small batches (max 7 students) or one-to-one options available based on your preference. You get WhatsApp/Call support outside class hours and direct access to me for all your doubts.",
+      question: "How is this different from large coaching platforms?",
+      answer: "This is a mentor-led model, not a factory-style setup. Teaching adapts to the student's gaps, pace, and thinking rather than following a fixed script.",
     },
     {
-      question: "How do I get started?",
-      answer: "Click 'Book a FREE Orientation Call' to schedule a 30-minute demo where we discuss your goals, current level, and how I can help you succeed.",
+      question: "What if my child is weak in fundamentals?",
+      answer: "That's exactly where the work starts. Classes focus on fixing foundational gaps first, before moving to exam-level questions.",
+    },
+    {
+      question: "Do you teach all curricula the same way?",
+      answer: "No. CBSE/ICSE, AP, SAT, and US Common Core each have different expectations. The teaching style, examples, and practice are adapted to the specific syllabus and exam format.",
+    },
+    {
+      question: "Will my child get individual attention in a group batch?",
+      answer: "Yes. Batches are kept intentionally small so individual gaps and mistakes are addressed during class. If a student needs deeper support, one-to-one sessions are also available.",
+    },
+    {
+      question: "What does \"concept-first\" actually mean in class?",
+      answer: "It means understanding why a method works before applying it to questions. This reduces guesswork and improves accuracy under exam pressure.",
+    },
+    {
+      question: "What happens in the free orientation call?",
+      answer: "We discuss the student's current level, problem areas, syllabus, and expectations. Based on this, I suggest whether the course is a good fit and in what format.",
     },
   ];
   
@@ -845,6 +816,10 @@ function FAQSection() {
 // Final CTA Section
 function FinalCTASection() {
   const [isFinalDialogOpen, setFinalDialogOpen] = useState(false);
+  const [isWhatsAppDialogOpen, setWhatsAppDialogOpen] = useState(false);
+  const whatsappNumber = "+919807612635";
+  const whatsappLink = `https://wa.me/919807612635?text=${encodeURIComponent("Hi Mukul, I'd like to book an orientation call.")}`;
+  const whatsappQr = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(whatsappLink)}`;
   return (
     <section className="py-20 bg-slate-950 text-white">
       <div className="max-w-4xl mx-auto px-4 md:px-6 text-center space-y-8">
@@ -872,17 +847,38 @@ function FinalCTASection() {
               <BookDemoForm onSuccess={() => setFinalDialogOpen(false)} />
             </DialogContent>
           </Dialog>
-          <Button 
-            size="lg" 
-            variant="ghost" 
-            className="border-0 shadow-md"
-            style={{ backgroundColor: '#25D366', color: 'white' }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#20BA5A'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#25D366'}
-          >
-            <MessageCircle className="w-5 h-5 mr-2" />
-            Chat on WhatsApp
-          </Button>
+          <Dialog open={isWhatsAppDialogOpen} onOpenChange={setWhatsAppDialogOpen}>
+            <DialogTrigger asChild>
+              <Button 
+                size="lg" 
+                variant="ghost" 
+                className="border-0 shadow-md"
+                style={{ backgroundColor: '#25D366', color: 'black' }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#20BA5A'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#25D366'}
+              >
+                <img src={whatsappIcon} alt="WhatsApp" className="w-5 h-5 mr-2" />
+                Chat on WhatsApp
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-md">
+              <DialogHeader>
+                <DialogTitle className="font-heading text-xl">Scan to WhatsApp</DialogTitle>
+                <DialogDescription>
+                  Scan the QR to message Mukul on WhatsApp or tap the button below.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="flex flex-col items-center gap-4 py-2">
+                <img src={whatsappQr} alt="WhatsApp QR code" className="w-56 h-56 rounded-lg border border-gray-200" />
+                <p className="text-sm text-gray-500">Number: {whatsappNumber}</p>
+                <Button asChild className="bg-[#25D366] hover:bg-[#20BA5A] text-black w-full">
+                  <a href={whatsappLink} target="_blank" rel="noreferrer">
+                    Open WhatsApp Chat
+                  </a>
+                </Button>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
         <div className="flex items-center justify-center gap-2">
           <StarRating />
@@ -890,6 +886,76 @@ function FinalCTASection() {
         </div>
       </div>
     </section>
+  );
+}
+
+// Floating WhatsApp Button
+function FloatingWhatsAppButton() {
+  const [isOpen, setIsOpen] = useState(false);
+  const whatsappNumber = "+919807612635";
+  const whatsappLink = `https://wa.me/919807612635?text=${encodeURIComponent("Hi Mukul, I'd like to book an orientation call.")}`;
+  const whatsappQr = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(whatsappLink)}`;
+  return (
+    <div className="fixed bottom-6 right-6 z-50">
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogTrigger asChild>
+          <button
+            aria-label="Chat on WhatsApp"
+            className="rounded-full shadow-lg border border-green-700/30"
+            style={{ backgroundColor: '#25D366', color: 'black', padding: '14px' }}
+          >
+            <img src={whatsappIcon} alt="WhatsApp" className="w-6 h-6" />
+          </button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="font-heading text-xl">Scan to WhatsApp</DialogTitle>
+            <DialogDescription>
+              Scan the QR to message Mukul on WhatsApp or tap the button below.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex flex-col items-center gap-4 py-2">
+            <img src={whatsappQr} alt="WhatsApp QR code" className="w-56 h-56 rounded-lg border border-gray-200" />
+            <p className="text-sm text-gray-500">Number: {whatsappNumber}</p>
+            <Button asChild className="bg-[#25D366] hover:bg-[#20BA5A] text-black w-full">
+              <a href={whatsappLink} target="_blank" rel="noreferrer">
+                Open WhatsApp Chat
+              </a>
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+}
+
+// Floating Demo Booking Button (left)
+function FloatingDemoButton() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="fixed bottom-6 left-6 z-50">
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogTrigger asChild>
+          <button
+            aria-label="Book an orientation call"
+            className="rounded-full shadow-lg border border-orange-500/30"
+            style={{ backgroundColor: '#f97316', color: 'white', padding: '14px' }}
+          >
+            <img src={calendarIcon} alt="Book orientation call" className="w-6 h-6" />
+          </button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="font-heading text-xl">Book Your Free Demo</DialogTitle>
+            <DialogDescription>
+              Fill in your details and we'll get back to you within 24 hours.
+            </DialogDescription>
+          </DialogHeader>
+          <BookDemoForm onSuccess={() => setIsOpen(false)} />
+        </DialogContent>
+      </Dialog>
+    </div>
   );
 }
 
@@ -1109,7 +1175,7 @@ export default function Home() {
         <HeroSection />
         <LearningProcessSection />
         <CoursesSection />
-        <StudentAchieversSection />
+        <ImageSliderSection />
         <SchoolsSection />
         <MeetTheTutorSection />
         <WhyLearnSection />
@@ -1118,6 +1184,8 @@ export default function Home() {
         <FinalCTASection />
       </main>
       <Footer />
+      <FloatingDemoButton />
+      <FloatingWhatsAppButton />
     </div>
   );
 }
