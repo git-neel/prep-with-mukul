@@ -6,9 +6,10 @@ import { X } from "lucide-react";
 
 interface ImageSliderProps {
   images: Array<{ src: string; caption: string }>;
+  fixedCardSize?: boolean;
 }
 
-export function ImageSlider({ images }: ImageSliderProps) {
+export function ImageSlider({ images, fixedCardSize = false }: ImageSliderProps) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const autoScrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -81,12 +82,12 @@ export function ImageSlider({ images }: ImageSliderProps) {
                   onClick={() => setSelectedImage(image.src)}
                 >
                   <CardContent className="p-0 h-full flex flex-col">
-                    <div className="h-[260px] flex items-center justify-center bg-gray-50">
+                    <div className="h-[260px] flex items-center justify-center bg-gray-100 overflow-hidden">
                       <img 
                         src={image.src} 
                         alt={image.caption}
                         loading="lazy"
-                        className="w-full h-full object-contain p-2"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="h-[60px] p-3 bg-white border-t flex items-center">

@@ -64,7 +64,7 @@ import {
 
 // Images will be served from public folder
 const heroImage = "/attached_assets/generated_images/student_studying_math_online.png";
-const tutorImage = "/attached_assets/generated_images/professional_tutor_portrait.png";
+const tutorImage = "/attached_assets/PrepWithMukul.jpeg";
 const whatsappIcon = "/attached_assets/WhatsApp.svg";
 const calendarIcon = "/attached_assets/calendar-orange.svg";
 
@@ -637,25 +637,6 @@ function MeetTheTutorSection() {
                   data-testid="img-tutor"
                 />
               </div>
-              
-              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-orange-500 rounded-2xl px-8 py-4 shadow-2xl border border-orange-400/50">
-                <div className="flex items-center gap-6">
-                  <div className="text-center">
-                    <p className="text-3xl font-black" style={{ color: '#f97316' }}><AnimatedCounter target={2000} suffix="+" /></p>
-                    <p className="text-sm font-semibold tracking-wide" style={{ color: '#f97316' }}>Hours</p>
-                  </div>
-                  <div className="w-px h-10" style={{ backgroundColor: 'rgba(249, 115, 22, 0.5)' }} />
-                  <div className="text-center">
-                    <p className="text-3xl font-black" style={{ color: '#f97316' }}><AnimatedCounter target={50} suffix="+" /></p>
-                    <p className="text-sm font-semibold tracking-wide" style={{ color: '#f97316' }}>Students</p>
-                  </div>
-                  <div className="w-px h-10" style={{ backgroundColor: 'rgba(249, 115, 22, 0.5)' }} />
-                  <div className="text-center">
-                    <p className="text-3xl font-black" style={{ color: '#f97316' }}><AnimatedCounter target={4} suffix="+" /></p>
-                    <p className="text-sm font-semibold tracking-wide" style={{ color: '#f97316' }}>Yrs Exp</p>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -749,6 +730,8 @@ function TestimonialsSection() {
 
 // Student Feedback Section
 function StudentFeedbackSection() {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  
   const feedbackImages = [
     { src: "/attached_assets/PeterReview.jpeg", caption: "Positive student feedback" },
     { src: "/attached_assets/RitikaResult.jpeg", caption: "Success story" },
@@ -771,8 +754,64 @@ function StudentFeedbackSection() {
           </p>
         </div>
         
-        <ImageSlider images={feedbackImages} />
+        <div className="flex justify-center">
+          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 max-w-2xl w-full">
+            <div className="grid grid-cols-2 gap-4">
+              {feedbackImages.map((image, index) => (
+                <div
+                  key={index}
+                  className="cursor-pointer group"
+                  onClick={() => setSelectedImage(image.src)}
+                >
+                  <div className="relative rounded-2xl overflow-hidden bg-gray-900 h-56 border border-white/10 group-hover:border-white/30 transition-all">
+                    <img
+                      src={image.src}
+                      alt={image.caption}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                      <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                          <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-400 mt-2 text-center">{image.caption}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
+
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative w-full h-full max-w-4xl max-h-[90vh] flex items-center justify-center">
+            <img
+              src={selectedImage}
+              alt="Full view"
+              className="max-w-full max-h-full object-contain"
+            />
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedImage(null);
+              }}
+              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white flex items-center justify-center transition-colors"
+              aria-label="Close"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
