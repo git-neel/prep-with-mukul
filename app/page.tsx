@@ -383,8 +383,6 @@ function ImageSliderSection() {
     { src: "/attached_assets/Mishika.jpeg", caption: "Concept clarity in action" },
     { src: "/attached_assets/divina.jpeg", caption: "Structured exam practice" },
     { src: "/attached_assets/mamtaRitika.jpeg", caption: "Student progress milestone" },
-    { src: "/attached_assets/PeterReview.jpeg", caption: "Positive student feedback" },
-    { src: "/attached_assets/RitikaResult.jpeg", caption: "Success story" },
     { src: "/attached_assets/sampleClass.jpeg", caption: "Batch class in session" },
     { src: "/attached_assets/SampleClass7th.jpeg", caption: "Engaging young learners" },
   ];
@@ -744,6 +742,36 @@ function TestimonialsSection() {
         </div>
         
         <VideoTestimonialSlider videos={videoTestimonials} />
+      </div>
+    </section>
+  );
+}
+
+// Student Feedback Section
+function StudentFeedbackSection() {
+  const feedbackImages = [
+    { src: "/attached_assets/PeterReview.jpeg", caption: "Positive student feedback" },
+    { src: "/attached_assets/RitikaResult.jpeg", caption: "Success story" },
+    { src: "/attached_assets/Student5WhatsappFeedback.jpeg", caption: "Student review" },
+    { src: "/attached_assets/student6WhatsappFeedback.jpeg", caption: "Student feedback" },
+  ];
+
+  return (
+    <section id="feedback" className="py-20 bg-background">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="text-center space-y-4 mb-12">
+          <Badge variant="secondary" className="text-sm px-4 py-1">
+            Feedback
+          </Badge>
+          <h2 className="font-heading text-2xl md:text-3xl font-bold">
+            What Students Are Saying
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Real screenshots from student feedback and achievements.
+          </p>
+        </div>
+        
+        <ImageSlider images={feedbackImages} />
       </div>
     </section>
   );
@@ -1180,6 +1208,7 @@ export default function Home() {
         <MeetTheTutorSection />
         <WhyLearnSection />
         <TestimonialsSection />
+        <StudentFeedbackSection />
         <FAQSection />
         <FinalCTASection />
       </main>
