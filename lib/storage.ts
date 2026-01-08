@@ -33,7 +33,7 @@ export class MemStorage implements IStorage {
     const demoBooking: DemoBooking = {
       ...booking,
       id,
-      message: booking.message || null,
+      message: booking.message ?? undefined,
       createdAt: new Date(),
     };
     this.demoBookings.set(id, demoBooking);

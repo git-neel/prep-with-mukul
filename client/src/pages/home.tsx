@@ -659,7 +659,7 @@ function WhyLearnSection() {
             Why
           </Badge>
           <h2 className="font-heading text-2xl md:text-3xl font-bold">
-            Learn with Mukul Sir.
+            Learn with Mukul
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Experience dedicated online coaching where students learn through engaging online classes for class 10, with complete support in mastering maths concepts. Total ownership till Board exam!

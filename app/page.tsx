@@ -112,7 +112,7 @@ function Header() {
   const navLinks = [
     { href: "#learning-process", label: "How It Works" },
     { href: "#courses", label: "Courses" },
-    { href: "#achievers", label: "Past Achievers" },
+    { href: "#classroom", label: "Experience" },
     { href: "#schools", label: "Schools" },
     { href: "#tutor", label: "Meet The Tutor" },
     { href: "#why-learn", label: "Why Learn" },
@@ -125,7 +125,7 @@ function Header() {
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16 gap-4">
           <Link href="/" className="flex items-center gap-2">
-            <span className="text-4xl text-primary font-bold tracking-tight" style={{ fontFamily: "'Playfair Display', serif" }} data-testid="logo-text">Prep With Mukul</span>
+            <span className="text-4xl text-primary font-bold tracking-tight" style={{ fontFamily: "'Dancing Script', cursive" }} data-testid="logo-text">Prep With Mukul</span>
           </Link>
           
           <nav className="hidden md:flex items-center gap-6">
@@ -295,13 +295,7 @@ function HeroSection() {
               </div>
             </div>
             
-            <div className="absolute -bottom-6 -right-6 bg-white rounded-xl p-4 shadow-2xl border-2 border-orange-400 hidden lg:block z-20">
-              <div className="text-center space-y-1">
-                <p className="text-xs font-semibold text-gray-600">Excellent</p>
-                <StarRating />
-                <p className="text-xs text-gray-600 font-medium">Based on 29 reviews</p>
-                <p className="font-bold text-blue-600 text-sm">Google</p>
-              </div>
+            <div className="absolute -bottom-6 -right-6 hidden lg:block z-20">
             </div>
           </div>
         </div>
@@ -395,7 +389,7 @@ function ImageSliderSection() {
             Experience
           </Badge>
           <h2 className="font-heading text-2xl md:text-3xl font-bold">
-            Inside the Classroom Moments with Mukul Sir
+            Inside the Classroom Moments with Mukul
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Real screenshots from live online teaching sessions. Click any image to view in detail.
@@ -432,7 +426,7 @@ function SchoolsSection() {
           <h2 className="font-heading text-2xl md:text-3xl font-bold">
             School students from
           </h2>
-          <p className="text-primary font-medium">120+ UAE, Singapore, Indian Schools</p>
+          <p className="text-primary font-medium">120+ US, UK, UAE, Singapore, Indian Students</p>
         </div>
         
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -566,7 +560,7 @@ function MeetTheTutorSection() {
   const [isTutorDialogOpen, setTutorDialogOpen] = useState(false);
   const stats = [
     { label: "Teaching Approach", value: "Concept Clarity & Exam Application" },
-    { label: "Students From", value: "India · UAE · USA · UK" },
+    { label: "Students From", value: "120+ USA · UK · UAE · Singapore · India" },
     { label: "Courses Taught", value: "CBSE · ICSE · AP · SAT · US Common Core" },
     { label: "Class Format", value: "Small Batches & One-to-One" },
   ];
@@ -578,7 +572,7 @@ function MeetTheTutorSection() {
           <div className="space-y-8">
             <div className="space-y-4">
               <Badge variant="secondary" className="text-sm px-4 py-1">
-                Namaste
+                Hello
               </Badge>
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-orange-500">
                 Meet The Tutor.
@@ -673,7 +667,7 @@ function WhyLearnSection() {
             Why
           </Badge>
           <h2 className="font-heading text-2xl md:text-3xl font-bold">
-            Learn with Mukul sir
+            Learn with Mukul
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Dedicated online Maths coaching focused on concept clarity, structured practice, and exam-ready problem-solving.
@@ -894,7 +888,7 @@ function FinalCTASection() {
           Ready to boost your Math scores?
         </h2>
         <p className="text-lg opacity-90 max-w-2xl mx-auto">
-          Join <span className="text-orange-400 font-semibold text-xl">30+ students</span> who have already transformed their Math performance. Book your orientation call today and take the first step towards exam success.
+          Join <span className="text-orange-400 font-semibold text-xl">120+ students</span> who have already transformed their Math performance. Book your orientation call today and take the first step towards exam success.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Dialog open={isFinalDialogOpen} onOpenChange={setFinalDialogOpen}>
@@ -946,10 +940,6 @@ function FinalCTASection() {
               </div>
             </DialogContent>
           </Dialog>
-        </div>
-        <div className="flex items-center justify-center gap-2">
-          <StarRating />
-          <span className="text-sm opacity-75">4.9/5 rating from 29 reviews</span>
         </div>
       </div>
     </section>
@@ -1033,7 +1023,7 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <span className="text-4xl text-white font-bold tracking-tight" style={{ fontFamily: "'Playfair Display', serif" }}>Prep With Mukul</span>
+            <span className="text-4xl text-white font-bold tracking-tight" style={{ fontFamily: "'Great Vibes', cursive" }}>Prep With Mukul</span>
             <p className="text-sm">
               Online math tuition for CBSE, ICSE, US Common Core, SAT Math, and AP Calculus with personalized attention and concept-first teaching.
             </p>
@@ -1044,7 +1034,7 @@ function Footer() {
             <ul className="grid grid-cols-2 gap-x-8 gap-y-2 text-sm">
               <li><a href="#learning-process" className="hover:text-white transition-colors">How It Works</a></li>
               <li><a href="#courses" className="hover:text-white transition-colors">Courses</a></li>
-              <li><a href="#achievers" className="hover:text-white transition-colors">Past Achievers</a></li>
+              <li><a href="#classroom" className="hover:text-white transition-colors">Experience</a></li>
               <li><a href="#schools" className="hover:text-white transition-colors">Schools</a></li>
               <li><a href="#tutor" className="hover:text-white transition-colors">Meet The Tutor</a></li>
               <li><a href="#why-learn" className="hover:text-white transition-colors">Why Learn</a></li>
