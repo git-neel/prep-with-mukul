@@ -187,7 +187,7 @@ function HeroSection() {
     <section className="relative bg-slate-950 text-white overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-900 to-orange-500/10" />
       
-      <div className="relative max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-24">
+      <div className="relative max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <h1 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold leading-tight text-white" data-testid="text-hero-headline">
@@ -257,7 +257,7 @@ function HeroSection() {
                     </DialogDescription>
                   </DialogHeader>
                   <div className="flex flex-col items-center gap-4 py-2">
-                    <img src={whatsappQr} alt="WhatsApp QR code" className="w-48 h-48 md:w-56 md:h-56 rounded-lg border border-gray-200" />
+                    <img src={whatsappQr} alt="WhatsApp QR code" className="w-56 h-56 rounded-lg border border-gray-200" />
                     <p className="text-sm text-gray-500">Number: {whatsappNumber}</p>
                     <Button asChild className="bg-[#25D366] hover:bg-[#20BA5A] text-black w-full">
                       <a href={whatsappLink} target="_blank" rel="noreferrer">
@@ -345,7 +345,7 @@ function LearningProcessSection() {
   ];
   
   return (
-    <section id="learning-process" className="py-12 md:py-20 bg-muted/30">
+    <section id="learning-process" className="py-20 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center space-y-4 mb-12">
           <Badge variant="secondary" className="text-sm px-4 py-1">
@@ -394,7 +394,7 @@ function ImageSliderSection() {
   ];
 
   return (
-    <section id="classroom" className="py-12 md:py-20 bg-background">
+    <section id="classroom" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center space-y-4 mb-12">
           <Badge variant="secondary" className="text-sm px-4 py-1">
@@ -429,7 +429,7 @@ function SchoolsSection() {
   ];
   
   return (
-    <section id="schools" className="py-12 md:py-20 bg-muted/30">
+    <section id="schools" className="py-20 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center space-y-4 mb-12">
           <Badge variant="secondary" className="text-sm px-4 py-1">
@@ -512,7 +512,7 @@ function CoursesSection() {
   ];
   
   return (
-    <section id="courses" className="py-12 md:py-20 bg-background">
+    <section id="courses" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center space-y-4 mb-12">
           <Badge variant="secondary" className="text-sm px-4 py-1">
@@ -581,7 +581,7 @@ function MeetTheTutorSection() {
   ];
   
   return (
-    <section id="tutor" className="py-12 md:py-20 bg-slate-950 text-white">
+    <section id="tutor" className="py-20 bg-slate-950 text-white">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
@@ -632,7 +632,7 @@ function MeetTheTutorSection() {
                   </DialogDescription>
                 </DialogHeader>
                 <div className="flex flex-col items-center gap-4 py-2">
-                  <img src={whatsappQr} alt="WhatsApp QR code" className="w-48 h-48 md:w-56 md:h-56 rounded-lg border border-gray-200" />
+                  <img src={whatsappQr} alt="WhatsApp QR code" className="w-56 h-56 rounded-lg border border-gray-200" />
                   <p className="text-sm text-gray-500">Number: {whatsappNumber}</p>
                   <Button asChild className="bg-[#25D366] hover:bg-[#20BA5A] text-black w-full">
                     <a href={whatsappLink} target="_blank" rel="noreferrer">
@@ -683,7 +683,7 @@ function WhyLearnSection() {
   ];
   
   return (
-    <section id="why-learn" className="py-12 md:py-20 bg-background">
+    <section id="why-learn" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center space-y-4 mb-12">
           <Badge variant="secondary" className="text-sm px-4 py-1">
@@ -727,7 +727,7 @@ function TestimonialsSection() {
   ];
   
   return (
-    <section id="testimonials" className="py-12 md:py-20 bg-muted/30">
+    <section id="testimonials" className="py-20 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center space-y-4 mb-12">
           <Badge variant="secondary" className="text-sm px-4 py-1">
@@ -757,7 +757,7 @@ function StudentFeedbackSection() {
   ];
 
   return (
-    <section id="feedback" className="py-12 md:py-20 bg-background">
+    <section id="feedback" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center space-y-4 mb-12">
           <Badge variant="secondary" className="text-sm px-4 py-1">
@@ -871,7 +871,7 @@ function FAQSection() {
   ];
   
   return (
-    <section id="faq" className="py-12 md:py-20 bg-background">
+    <section id="faq" className="py-20 bg-background">
       <div className="max-w-3xl mx-auto px-4 md:px-6">
         <div className="text-center space-y-4 mb-12">
           <Badge variant="secondary" className="text-sm px-4 py-1">
@@ -904,7 +904,7 @@ function FinalCTASection() {
   const whatsappLink = `https://wa.me/919807612635?text=${encodeURIComponent("Hi Mukul, I'd like to book an orientation call.")}`;
   const whatsappQr = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(whatsappLink)}`;
   return (
-    <section className="py-12 md:py-20 bg-slate-950 text-white">
+    <section className="py-20 bg-slate-950 text-white">
       <div className="max-w-4xl mx-auto px-4 md:px-6 text-center space-y-8">
         <h2 className="font-heading text-3xl md:text-4xl font-bold">
           Ready to boost your Math scores?
@@ -920,7 +920,7 @@ function FinalCTASection() {
                 Book an Orientation Call on WhatsApp
               </Button>
             </DialogTrigger>
-            <DialogContent className="w-[92vw] max-w-[92vw] sm:max-w-md">
+            <DialogContent className="sm:max-w-md">
               <DialogHeader>
                 <DialogTitle className="font-heading text-xl">Scan to WhatsApp</DialogTitle>
                 <DialogDescription>
@@ -928,7 +928,7 @@ function FinalCTASection() {
                 </DialogDescription>
               </DialogHeader>
               <div className="flex flex-col items-center gap-4 py-2">
-                <img src={whatsappQr} alt="WhatsApp QR code" className="w-48 h-48 md:w-56 md:h-56 rounded-lg border border-gray-200" />
+                <img src={whatsappQr} alt="WhatsApp QR code" className="w-56 h-56 rounded-lg border border-gray-200" />
                 <p className="text-sm text-gray-500">Number: {whatsappNumber}</p>
                 <Button asChild className="bg-[#25D366] hover:bg-[#20BA5A] text-black w-full">
                   <a href={whatsappLink} target="_blank" rel="noreferrer">
@@ -951,18 +951,18 @@ function FloatingWhatsAppButton() {
   const whatsappLink = `https://wa.me/919807612635?text=${encodeURIComponent("Hi Mukul, I'd like to book an orientation call.")}`;
   const whatsappQr = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(whatsappLink)}`;
   return (
-    <div className="fixed right-4 md:right-6 z-50" style={{ bottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
+    <div className="fixed bottom-6 right-6 z-50">
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
           <button
             aria-label="Chat on WhatsApp"
-            className="rounded-full shadow-lg border border-green-700/30 p-3 md:p-[14px]"
-            style={{ backgroundColor: '#25D366', color: 'black' }}
+            className="rounded-full shadow-lg border border-green-700/30"
+            style={{ backgroundColor: '#25D366', color: 'black', padding: '14px' }}
           >
             <img src={whatsappIcon} alt="WhatsApp" className="w-6 h-6" />
           </button>
         </DialogTrigger>
-        <DialogContent className="w-[92vw] max-w-[92vw] sm:max-w-md">
+        <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="font-heading text-xl">Scan to WhatsApp</DialogTitle>
             <DialogDescription>
@@ -970,7 +970,7 @@ function FloatingWhatsAppButton() {
             </DialogDescription>
           </DialogHeader>
           <div className="flex flex-col items-center gap-4 py-2">
-            <img src={whatsappQr} alt="WhatsApp QR code" className="w-48 h-48 md:w-56 md:h-56 rounded-lg border border-gray-200" />
+            <img src={whatsappQr} alt="WhatsApp QR code" className="w-56 h-56 rounded-lg border border-gray-200" />
             <p className="text-sm text-gray-500">Number: {whatsappNumber}</p>
             <Button asChild className="bg-[#25D366] hover:bg-[#20BA5A] text-black w-full">
               <a href={whatsappLink} target="_blank" rel="noreferrer">
