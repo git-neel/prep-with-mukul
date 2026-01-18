@@ -65,9 +65,10 @@ export function ImageSlider({ images, fixedCardSize = false }: ImageSliderProps)
   return (
     <>
       <div className="relative">
+        {/* Horizontal scroll on desktop, grid on mobile */}
         <div
           ref={containerRef}
-          className="overflow-x-auto scroll-smooth scrollbar-hide"
+          className="hidden md:block overflow-x-auto scroll-smooth scrollbar-hide"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           onMouseEnter={() => autoScrollIntervalRef.current && clearInterval(autoScrollIntervalRef.current)}
           onMouseLeave={startAutoScroll}
@@ -99,6 +100,31 @@ export function ImageSlider({ images, fixedCardSize = false }: ImageSliderProps)
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Grid layout on mobile */}
+        <div className="md:hidden grid grid-cols-2 gap-3">
+          {images.map((image, index) => (
+            <Card 
+              key={index}
+              className="card-hover overflow-hidden cursor-pointer h-[200px] hover:shadow-lg transition-shadow"
+              onClick={() => setSelectedImage(image.src)}
+            >
+              <CardContent className="p-0 h-full flex flex-col">
+                <div className="flex-1 flex items-center justify-center bg-gray-100 overflow-hidden">
+                  <img 
+                    src={image.src} 
+                    alt={image.caption}
+                    loading="lazy"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-2 bg-white border-t flex items-center min-h-[50px]">
+                  <p className="text-xs text-gray-600 line-clamp-2">{image.caption}</p>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
 

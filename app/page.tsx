@@ -187,27 +187,27 @@ function HeroSection() {
     <section className="relative bg-slate-950 text-white overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-900 to-orange-500/10" />
       
-      <div className="relative max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <h1 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold leading-tight text-white" data-testid="text-hero-headline">
+      <div className="relative max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-8 sm:py-12 md:py-24">
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
+          <div className="space-y-4 sm:space-y-6">
+            <h1 className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight text-white" data-testid="text-hero-headline">
               Online Maths Tuition for{" "}
               <span className="text-orange-400">CBSE, ICSE, AP & SAT</span>
             </h1>
             
-            <p className="text-xl md:text-2xl font-semibold text-gray-200 leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl font-semibold text-gray-200 leading-relaxed">
               Help Your Child Apply Maths Correctly in Exams:{" "}
               <span className="text-orange-300">Not Just Memorise Formulas</span>
             </p>
             
-            <div className="space-y-4 text-gray-300">
-              <p className="text-base md:text-lg leading-relaxed">
+            <div className="space-y-3 sm:space-y-4 text-gray-300">
+              <p className="text-sm sm:text-base md:text-lg leading-relaxed">
                 Concept-based online Maths coaching for{" "}
                 <strong className="text-white">CBSE and ICSE students in India</strong>, and for{" "}
                 <strong className="text-white">AP Precalculus, AP Calculus, and SAT Math students worldwide</strong>.
               </p>
               
-              <p className="text-base md:text-lg leading-relaxed">
+              <p className="text-sm sm:text-base md:text-lg leading-relaxed">
                 Designed for students who understand concepts but lose marks due to{" "}
                 <span className="text-orange-300">poor application</span>,{" "}
                 <span className="text-orange-300">exam pressure</span>, or{" "}
@@ -215,51 +215,51 @@ function HeroSection() {
               </p>
             </div>
             
-            <div className="space-y-4 pt-4">
+            <div className="space-y-3 sm:space-y-4 pt-2 sm:pt-4">
               <h3 className="text-lg font-semibold text-white">
                 What students gain from this <span className="text-orange-400">CONCEPT-FIRST</span> approach:
               </h3>
-              <ul className="space-y-3 text-gray-300">
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-base md:text-lg leading-relaxed">
+              <ul className="space-y-2 sm:space-y-3 text-gray-300">
+                <li className="flex items-start gap-2 sm:gap-3">
+                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-xs sm:text-sm md:text-base leading-relaxed">
                     Clear conceptual understanding that reduces common mistakes
                   </span>
                 </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-base md:text-lg leading-relaxed">
+                <li className="flex items-start gap-2 sm:gap-3">
+                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-xs sm:text-sm md:text-base leading-relaxed">
                     Exam-aligned practice that improves accuracy and confidence
                   </span>
                 </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-base md:text-lg leading-relaxed">
+                <li className="flex items-start gap-2 sm:gap-3">
+                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-xs sm:text-sm md:text-base leading-relaxed">
                     Small batches or one-to-one sessions with consistent guidance throughout the exam cycle
                   </span>
                 </li>
               </ul>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-col gap-2 sm:gap-4 pt-2 sm:pt-4">
               <Dialog open={isHeroDialogOpen} onOpenChange={setHeroDialogOpen}>
                 <DialogTrigger asChild>
-                  <Button size="lg" className="text-base px-8 py-6" style={{ color: 'black', backgroundColor: '#25D366' }} data-testid="button-book-demo-hero">
-                    <img src={whatsappIcon} alt="WhatsApp" className="w-5 h-5 mr-2" />
-                    Book a FREE Orientation Call on WhatsApp
+                  <Button size="lg" className="w-full text-xs sm:text-sm md:text-base px-4 sm:px-8 py-4 sm:py-6" style={{ color: 'black', backgroundColor: '#25D366' }} data-testid="button-book-demo-hero">
+                    <img src={whatsappIcon} alt="WhatsApp" className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                    Book FREE Orientation on WhatsApp
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-md">
+                <DialogContent className="max-h-[85vh] overflow-y-auto">
                   <DialogHeader>
-                    <DialogTitle className="font-heading text-xl">Scan to WhatsApp</DialogTitle>
-                    <DialogDescription>
+                    <DialogTitle className="font-heading text-lg sm:text-xl">Scan to WhatsApp</DialogTitle>
+                    <DialogDescription className="text-xs sm:text-sm">
                       Scan the QR to message Mukul on WhatsApp or tap the button below.
                     </DialogDescription>
                   </DialogHeader>
-                  <div className="flex flex-col items-center gap-4 py-2">
-                    <img src={whatsappQr} alt="WhatsApp QR code" className="w-56 h-56 rounded-lg border border-gray-200" />
-                    <p className="text-sm text-gray-500">Number: {whatsappNumber}</p>
-                    <Button asChild className="bg-[#25D366] hover:bg-[#20BA5A] text-black w-full">
+                  <div className="flex flex-col items-center gap-3 sm:gap-4 py-2">
+                    <img src={whatsappQr} alt="WhatsApp QR code" className="w-40 h-40 sm:w-48 sm:h-48 rounded-lg border border-gray-200" />
+                    <p className="text-xs sm:text-sm text-gray-500">Number: {whatsappNumber}</p>
+                    <Button asChild className="bg-[#25D366] hover:bg-[#20BA5A] text-black w-full text-xs sm:text-sm">
                       <a href={whatsappLink} target="_blank" rel="noreferrer">
                         Open WhatsApp Chat
                       </a>
@@ -273,16 +273,16 @@ function HeroSection() {
               No sales pitch • Honest guidance • Right-fit only
             </p>
             
-            <div className="flex flex-wrap items-center gap-4 pt-2">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-4 pt-2 sm:pt-4">
               <div className="flex items-center gap-1">
                 <StarRating />
               </div>
-              <span className="text-sm text-gray-300">Join 120+ league of achievers!</span>
+              <span className="text-xs sm:text-sm text-gray-300">Join 120+ league of achievers!</span>
             </div>
           </div>
           
-          <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-slate-900 to-blue-900">
+          <div className="relative mt-6 sm:mt-0">
+            <div className="relative rounded-lg sm:rounded-2xl overflow-hidden shadow-lg sm:shadow-2xl bg-gradient-to-br from-slate-900 to-blue-900">
               <img
                 src={heroImage}
                 alt="Student learning mathematics online"
@@ -291,15 +291,15 @@ function HeroSection() {
               />
               <div className="absolute inset-0 bg-gradient-to-br from-slate-950/40 via-transparent to-orange-500/10 pointer-events-none" />
               
-              <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2 z-10">
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl font-bold text-green-400">75%</span>
-                  <ChevronRight className="w-4 h-4 text-white" />
-                  <span className="text-2xl font-bold text-green-300">95%</span>
+              <div className="absolute top-2 sm:top-4 right-2 sm:right-4 bg-black/70 backdrop-blur-sm rounded-lg px-2 sm:px-4 py-1 sm:py-2 z-10">
+                <div className="flex items-center gap-1 sm:gap-3">
+                  <span className="text-lg sm:text-2xl font-bold text-green-400">75%</span>
+                  <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
+                  <span className="text-lg sm:text-2xl font-bold text-green-300">95%</span>
                 </div>
               </div>
               
-              <div className="absolute top-4 left-4">
+              <div className="absolute top-2 sm:top-4 left-2 sm:left-4">
                 <Badge variant="destructive" className="bg-red-500 text-white text-xs">
                   <span className="w-2 h-2 bg-white rounded-full mr-1 animate-pulse" />
                   LIVE
@@ -307,7 +307,7 @@ function HeroSection() {
               </div>
             </div>
             
-            <div className="absolute -bottom-6 -right-6 hidden lg:block z-20">
+            <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 hidden lg:block z-20">
             </div>
           </div>
         </div>
@@ -394,16 +394,16 @@ function ImageSliderSection() {
   ];
 
   return (
-    <section id="classroom" className="py-20 bg-background">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className="text-center space-y-4 mb-12">
-          <Badge variant="secondary" className="text-sm px-4 py-1">
+    <section id="classroom" className="py-8 sm:py-12 md:py-20 bg-background">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6">
+        <div className="text-center space-y-2 sm:space-y-4 mb-8 sm:mb-12">
+          <Badge variant="secondary" className="text-xs sm:text-sm px-3 sm:px-4 py-1">
             Experience
           </Badge>
-          <h2 className="font-heading text-2xl md:text-3xl font-bold">
+          <h2 className="font-heading text-lg sm:text-2xl md:text-3xl font-bold">
             Inside the Classroom Moments with Mukul
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xs sm:text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
             Real screenshots from live online teaching sessions. Click any image to view in detail.
           </p>
         </div>
@@ -619,22 +619,22 @@ function MeetTheTutorSection() {
             
             <Dialog open={isTutorDialogOpen} onOpenChange={setTutorDialogOpen}>
               <DialogTrigger asChild>
-                <Button size="lg" className="hover:opacity-90" style={{ color: 'black', backgroundColor: '#25D366' }} data-testid="button-book-demo-tutor">
-                  <img src={whatsappIcon} alt="WhatsApp" className="w-5 h-5 mr-2" />
-                  Book a FREE Orientation Call on WhatsApp
+                <Button size="lg" className="w-full sm:w-auto text-xs sm:text-sm md:text-base px-4 sm:px-8 py-4 sm:py-6 hover:opacity-90" style={{ color: 'black', backgroundColor: '#25D366' }} data-testid="button-book-demo-tutor">
+                  <img src={whatsappIcon} alt="WhatsApp" className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                  Book FREE Orientation on WhatsApp
                 </Button>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-md">
+              <DialogContent className="max-h-[85vh] overflow-y-auto">
                 <DialogHeader>
-                  <DialogTitle className="font-heading text-xl">Scan to WhatsApp</DialogTitle>
-                  <DialogDescription>
+                  <DialogTitle className="font-heading text-lg sm:text-xl">Scan to WhatsApp</DialogTitle>
+                  <DialogDescription className="text-xs sm:text-sm">
                     Scan the QR to message Mukul on WhatsApp or tap the button below.
                   </DialogDescription>
                 </DialogHeader>
-                <div className="flex flex-col items-center gap-4 py-2">
-                  <img src={whatsappQr} alt="WhatsApp QR code" className="w-56 h-56 rounded-lg border border-gray-200" />
-                  <p className="text-sm text-gray-500">Number: {whatsappNumber}</p>
-                  <Button asChild className="bg-[#25D366] hover:bg-[#20BA5A] text-black w-full">
+                <div className="flex flex-col items-center gap-3 sm:gap-4 py-2">
+                  <img src={whatsappQr} alt="WhatsApp QR code" className="w-40 h-40 sm:w-48 sm:h-48 rounded-lg border border-gray-200" />
+                  <p className="text-xs sm:text-sm text-gray-500">Number: {whatsappNumber}</p>
+                  <Button asChild className="bg-[#25D366] hover:bg-[#20BA5A] text-black w-full text-xs sm:text-sm">
                     <a href={whatsappLink} target="_blank" rel="noreferrer">
                       Open WhatsApp Chat
                     </a>
@@ -951,28 +951,28 @@ function FloatingWhatsAppButton() {
   const whatsappLink = `https://wa.me/919807612635?text=${encodeURIComponent("Hi Mukul, I'd like to book an orientation call.")}`;
   const whatsappQr = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(whatsappLink)}`;
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed right-4 md:right-6 z-50" style={{ bottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
           <button
             aria-label="Chat on WhatsApp"
-            className="rounded-full shadow-lg border border-green-700/30"
-            style={{ backgroundColor: '#25D366', color: 'black', padding: '14px' }}
+            className="rounded-full shadow-lg border border-green-700/30 p-3 md:p-[14px]"
+            style={{ backgroundColor: '#25D366', color: 'black' }}
           >
-            <img src={whatsappIcon} alt="WhatsApp" className="w-6 h-6" />
+            <img src={whatsappIcon} alt="WhatsApp" className="w-5 h-5 md:w-6 md:h-6" />
           </button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="max-h-[85vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="font-heading text-xl">Scan to WhatsApp</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="font-heading text-lg sm:text-xl">Scan to WhatsApp</DialogTitle>
+            <DialogDescription className="text-xs sm:text-sm">
               Scan the QR to message Mukul on WhatsApp or tap the button below.
             </DialogDescription>
           </DialogHeader>
-          <div className="flex flex-col items-center gap-4 py-2">
-            <img src={whatsappQr} alt="WhatsApp QR code" className="w-56 h-56 rounded-lg border border-gray-200" />
-            <p className="text-sm text-gray-500">Number: {whatsappNumber}</p>
-            <Button asChild className="bg-[#25D366] hover:bg-[#20BA5A] text-black w-full">
+          <div className="flex flex-col items-center gap-3 sm:gap-4 py-2">
+            <img src={whatsappQr} alt="WhatsApp QR code" className="w-40 h-40 sm:w-48 sm:h-48 rounded-lg border border-gray-200" />
+            <p className="text-xs sm:text-sm text-gray-500">Number: {whatsappNumber}</p>
+            <Button asChild className="bg-[#25D366] hover:bg-[#20BA5A] text-black w-full text-xs sm:text-sm">
               <a href={whatsappLink} target="_blank" rel="noreferrer">
                 Open WhatsApp Chat
               </a>
@@ -1192,10 +1192,13 @@ function BookDemoForm({ onSuccess }: { onSuccess?: () => void }) {
 export default function Home() {
   useEffect(() => {
     document.documentElement.classList.add("dark");
+    // Prevent horizontal scrolling on mobile
+    document.body.style.overflowX = "hidden";
+    document.documentElement.style.overflowX = "hidden";
   }, []);
   
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <Header />
       <main>
         <HeroSection />
