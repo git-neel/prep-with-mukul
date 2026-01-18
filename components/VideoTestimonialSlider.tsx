@@ -95,7 +95,6 @@ export function VideoTestimonialSlider({ videos }: VideoTestimonialSliderProps) 
 
   useEffect(() => {
     return () => {
-      if (previewTimeoutRef.current) clearTimeout(previewTimeoutRef.current);
       if (touchTimeoutRef.current) clearTimeout(touchTimeoutRef.current);
     };
   }, []);
