@@ -1,28 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Dialog,
   DialogContent,
@@ -31,9 +12,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
-import { insertDemoBookingSchema, type InsertDemoBooking } from "@shared/schema";
 import {
   Star,
   Calendar,
@@ -187,6 +165,9 @@ function Header({ isDark, toggleTheme }: { isDark: boolean; toggleTheme: () => v
 // Hero Section Component
 function HeroSection() {
   const [isHeroDialogOpen, setHeroDialogOpen] = useState(false);
+  const whatsappNumber = "+919807612635";
+  const whatsappLink = `https://wa.me/919807612635?text=${encodeURIComponent("Hi Mukul, I'd like to book an orientation call.")}`;
+  const whatsappQr = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(whatsappLink)}`;
   return (
     <section className="relative bg-slate-900 dark:bg-slate-950 text-white overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-primary/20 dark:from-slate-950 dark:via-slate-900 dark:to-primary/10" />
@@ -208,7 +189,7 @@ function HeroSection() {
               <ul className="space-y-1 text-sm md:text-base">
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">&#9702;</span>
-                  Know concepts, but can't apply in exams.
+                  Know concepts, but can&apos;t apply in exams.
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">&#9702;</span>
@@ -232,19 +213,27 @@ function HeroSection() {
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Dialog open={isHeroDialogOpen} onOpenChange={setHeroDialogOpen}>
                 <DialogTrigger asChild>
-                  <Button size="lg" className="text-base px-8 py-6" data-testid="button-book-demo-hero">
-                    <Calendar className="w-5 h-5 mr-2" />
-                    Book my FREE Demo
+                  <Button size="lg" className="text-base px-8 py-6" style={{ backgroundColor: '#25D366', color: 'black' }} data-testid="button-book-demo-hero">
+                    <WhatsAppIcon className="w-5 h-5 mr-2" />
+                    Book on WhatsApp
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-md">
                   <DialogHeader>
-                    <DialogTitle className="font-heading text-xl">Book Your Free Demo</DialogTitle>
+                    <DialogTitle className="font-heading text-xl">Scan to WhatsApp</DialogTitle>
                     <DialogDescription>
-                      Fill in your details and we'll get back to you within 24 hours.
+                      Scan the QR to message Mukul on WhatsApp or tap the button below.
                     </DialogDescription>
                   </DialogHeader>
-                  <BookDemoForm onSuccess={() => setHeroDialogOpen(false)} />
+                  <div className="flex flex-col items-center gap-4 py-2">
+                    <img src={whatsappQr} alt="WhatsApp QR code" className="w-56 h-56 rounded-lg border border-gray-200" />
+                    <p className="text-sm text-gray-500">Number: {whatsappNumber}</p>
+                    <Button asChild className="bg-[#25D366] hover:bg-[#20BA5A] text-black w-full">
+                      <a href={whatsappLink} target="_blank" rel="noreferrer">
+                        Open WhatsApp Chat
+                      </a>
+                    </Button>
+                  </div>
                 </DialogContent>
               </Dialog>
             </div>
@@ -386,7 +375,7 @@ function StudentAchieversSection() {
             Why
           </Badge>
           <h2 className="font-heading text-2xl md:text-3xl font-bold" data-testid="text-top-performers">
-            MasterMukul's 2024 Top Performers
+            MasterMukul&apos;s 2024 Top Performers
           </h2>
         </div>
         
@@ -456,6 +445,9 @@ function SchoolsSection() {
 // How It Works Section
 function HowItWorksSection() {
   const [isHowDialogOpen, setHowDialogOpen] = useState(false);
+  const whatsappNumber = "+919807612635";
+  const whatsappLink = `https://wa.me/919807612635?text=${encodeURIComponent("Hi Mukul, I'd like to book an orientation call.")}`;
+  const whatsappQr = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(whatsappLink)}`;
   const points = [
     { text: "Small batches keep the student actively engaged", highlight: "Max. 7" },
     { text: "Work together with other kids with similar struggles.", highlight: null },
@@ -494,19 +486,27 @@ function HowItWorksSection() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Dialog open={isHowDialogOpen} onOpenChange={setHowDialogOpen}>
                 <DialogTrigger asChild>
-                  <Button size="lg" data-testid="button-book-demo-how">
-                    <Calendar className="w-5 h-5 mr-2" />
-                    Book a FREE Demo
+                  <Button size="lg" style={{ backgroundColor: '#25D366', color: 'black' }} data-testid="button-book-demo-how">
+                    <WhatsAppIcon className="w-5 h-5 mr-2" />
+                    Book on WhatsApp
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-md">
                   <DialogHeader>
-                    <DialogTitle className="font-heading text-xl">Book Your Free Demo</DialogTitle>
+                    <DialogTitle className="font-heading text-xl">Scan to WhatsApp</DialogTitle>
                     <DialogDescription>
-                      Fill in your details and we'll get back to you within 24 hours.
+                      Scan the QR to message Mukul on WhatsApp or tap the button below.
                     </DialogDescription>
                   </DialogHeader>
-                  <BookDemoForm onSuccess={() => setHowDialogOpen(false)} />
+                  <div className="flex flex-col items-center gap-4 py-2">
+                    <img src={whatsappQr} alt="WhatsApp QR code" className="w-56 h-56 rounded-lg border border-gray-200" />
+                    <p className="text-sm text-gray-500">Number: {whatsappNumber}</p>
+                    <Button asChild className="bg-[#25D366] hover:bg-[#20BA5A] text-black w-full">
+                      <a href={whatsappLink} target="_blank" rel="noreferrer">
+                        Open WhatsApp Chat
+                      </a>
+                    </Button>
+                  </div>
                 </DialogContent>
               </Dialog>
               <p className="text-sm text-muted-foreground flex items-center">
@@ -535,6 +535,9 @@ function HowItWorksSection() {
 // Meet The Tutor Section
 function MeetTheTutorSection() {
   const [isTutorDialogOpen, setTutorDialogOpen] = useState(false);
+  const whatsappNumber = "+919807612635";
+  const whatsappLink = `https://wa.me/919807612635?text=${encodeURIComponent("Hi Mukul, I'd like to book an orientation call.")}`;
+  const whatsappQr = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(whatsappLink)}`;
   const stats = [
     { label: "Nurturing", value: "Toppers Since 2013" },
     { label: "Students", value: "129+ Global Schools" },
@@ -577,19 +580,27 @@ function MeetTheTutorSection() {
             
             <Dialog open={isTutorDialogOpen} onOpenChange={setTutorDialogOpen}>
               <DialogTrigger asChild>
-                <Button size="lg" className="bg-white text-slate-900 hover:bg-gray-100" data-testid="button-book-demo-tutor">
-                  <Calendar className="w-5 h-5 mr-2" />
-                  Book my FREE Demo
+                <Button size="lg" style={{ backgroundColor: '#25D366', color: 'black' }} data-testid="button-book-demo-tutor">
+                  <WhatsAppIcon className="w-5 h-5 mr-2" />
+                  Book on WhatsApp
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-md">
                 <DialogHeader>
-                  <DialogTitle className="font-heading text-xl">Book Your Free Demo</DialogTitle>
+                  <DialogTitle className="font-heading text-xl">Scan to WhatsApp</DialogTitle>
                   <DialogDescription>
-                    Fill in your details and we'll get back to you within 24 hours.
+                    Scan the QR to message Mukul on WhatsApp or tap the button below.
                   </DialogDescription>
                 </DialogHeader>
-                <BookDemoForm onSuccess={() => setTutorDialogOpen(false)} />
+                <div className="flex flex-col items-center gap-4 py-2">
+                  <img src={whatsappQr} alt="WhatsApp QR code" className="w-56 h-56 rounded-lg border border-gray-200" />
+                  <p className="text-sm text-gray-500">Number: {whatsappNumber}</p>
+                  <Button asChild className="bg-[#25D366] hover:bg-[#20BA5A] text-black w-full">
+                    <a href={whatsappLink} target="_blank" rel="noreferrer">
+                      Open WhatsApp Chat
+                    </a>
+                  </Button>
+                </div>
               </DialogContent>
             </Dialog>
           </div>
@@ -690,7 +701,7 @@ function TestimonialsSection() {
     {
       name: "Mudit S.",
       score: "90/100",
-      quote: "Happy to find a tutor who could understand my child's psychology",
+      quote: "Happy to find a tutor who could understand my child&apos;s psychology",
     },
     {
       name: "Pranay",
@@ -738,7 +749,7 @@ function TestimonialsSection() {
                   </div>
                 </div>
                 <StarRating />
-                <p className="text-muted-foreground text-sm italic">"{testimonial.quote}"</p>
+                <p className="text-muted-foreground text-sm italic">&ldquo;{testimonial.quote}&rdquo;</p>
               </CardContent>
             </Card>
           ))}
@@ -768,7 +779,7 @@ function FAQSection() {
     },
     {
       question: "How do I join a demo class?",
-      answer: "Simply click on 'Book my FREE Demo' button and fill in your details. I'll reach out to schedule a convenient time for you.",
+      answer: "Simply click on 'Book an Orientation Call on WhatsApp' button and message Mukul on WhatsApp. I&apos;ll schedule a convenient time for you.",
     },
     {
       question: "What platform do you use for classes?",
@@ -805,10 +816,9 @@ function FAQSection() {
 
 // Final CTA Section
 function FinalCTASection() {
-  const [isFinalDialogOpen, setFinalDialogOpen] = useState(false);
   const [isWhatsAppDialogOpen, setWhatsAppDialogOpen] = useState(false);
   const whatsappNumber = "+919807612635";
-  const whatsappLink = `https://wa.me/919807612635?text=${encodeURIComponent("Hi Mukul, I'd like to book an orientation call.")}`;
+  const whatsappLink = `https://wa.me/919807612635?text=${encodeURIComponent("Hi Mukul, I&apos;d like to book an orientation call.")}`;
   const whatsappQr = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(whatsappLink)}`;
   return (
     <section className="py-20 bg-primary text-primary-foreground">
@@ -820,28 +830,11 @@ function FinalCTASection() {
           Join 1470+ students who have already transformed their Math performance. Book your free demo today and take the first step towards academic excellence.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Dialog open={isFinalDialogOpen} onOpenChange={setFinalDialogOpen}>
-            <DialogTrigger asChild>
-              <Button size="lg" variant="secondary" className="text-primary" data-testid="button-book-demo-cta">
-                <Calendar className="w-5 h-5 mr-2" />
-                Book my FREE Demo
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-md">
-              <DialogHeader>
-                <DialogTitle className="font-heading text-xl">Book Your Free Demo</DialogTitle>
-                <DialogDescription>
-                  Fill in your details and we'll get back to you within 24 hours.
-                </DialogDescription>
-              </DialogHeader>
-              <BookDemoForm onSuccess={() => setFinalDialogOpen(false)} />
-            </DialogContent>
-          </Dialog>
           <Dialog open={isWhatsAppDialogOpen} onOpenChange={setWhatsAppDialogOpen}>
             <DialogTrigger asChild>
-              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
+              <Button size="lg" className="hover:opacity-90 text-black font-semibold" style={{ backgroundColor: '#25D366' }} data-testid="button-book-demo-cta">
                 <WhatsAppIcon className="w-5 h-5 mr-2" />
-                Chat on WhatsApp
+                Book an Orientation Call on WhatsApp
               </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-md">
@@ -876,7 +869,7 @@ function FinalCTASection() {
 function FloatingWhatsAppButton() {
   const [isOpen, setIsOpen] = useState(false);
   const whatsappNumber = "+919807612635";
-  const whatsappLink = `https://wa.me/919807612635?text=${encodeURIComponent("Hi Mukul, I'd like to book an orientation call.")}`;
+  const whatsappLink = `https://wa.me/919807612635?text=${encodeURIComponent("Hi Mukul, I&apos;d like to book an orientation call.")}`;
   const whatsappQr = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(whatsappLink)}`;
   return (
     <div className="fixed bottom-6 right-6 z-50">
@@ -974,154 +967,50 @@ function Footer() {
 
 // Book Demo Form Component
 function BookDemoForm({ onSuccess }: { onSuccess?: () => void }) {
-  const { toast } = useToast();
-  
-  const form = useForm<InsertDemoBooking>({
-    resolver: zodResolver(insertDemoBookingSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
-      grade: "10",
-      message: "",
-    },
-  });
-  
-  const mutation = useMutation({
-    mutationFn: async (data: InsertDemoBooking) => {
-      const response = await apiRequest("POST", "/api/bookings", data);
-      return response;
-    },
-    onSuccess: () => {
-      toast({
-        title: "Booking completed!",
-        description: "Booking is done, we'll contact your number as soon as possible.",
-        duration: 5000,
-        style: { backgroundColor: 'hsl(38 94% 50%)', color: 'black' },
-      });
-      form.reset({ name: "", email: "", phone: "", grade: "10", message: "" });
-      onSuccess?.();
-    },
-    onError: () => {
-      toast({
-        title: "Something went wrong",
-        description: "Please try again or contact us directly.",
-        variant: "destructive",
-      });
-    },
-  });
-  
-  const onSubmit = (data: InsertDemoBooking) => {
-    mutation.mutate(data);
-  };
-  
+  const whatsappNumber = "+919807612635";
+  const whatsappMessage = "Hi Mukul, I'd like to book an orientation call.";
+  const whatsappLink = `https://wa.me/919807612635?text=${encodeURIComponent(whatsappMessage)}`;
+  const whatsappQr = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(whatsappLink)}`;
+
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input placeholder="Your name" {...field} data-testid="input-name" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="your@email.com" type="email" {...field} data-testid="input-email" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        
-        <FormField
-          control={form.control}
-          name="phone"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Phone</FormLabel>
-              <FormControl>
-                <Input placeholder="+91 98765 43210" {...field} data-testid="input-phone" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        
-        <FormField
-          control={form.control}
-          name="grade"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Grade</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger data-testid="select-grade">
-                    <SelectValue placeholder="Select grade" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="9">Class 9</SelectItem>
-                  <SelectItem value="10">Class 10</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        
-        <FormField
-          control={form.control}
-          name="message"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Message</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="Tell us about your learning goals..."
-                  className="resize-none"
-                  {...field}
-                  value={field.value || ""}
-                  data-testid="textarea-message"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        
-        <Button type="submit" className="w-full" disabled={mutation.isPending} data-testid="button-submit-demo">
-          {mutation.isPending ? "Submitting..." : "Book Free Demo"}
+    <div className="space-y-4">
+      <p className="text-sm text-muted-foreground">
+        We now book orientation calls over WhatsApp. Tap the button or scan the QR and we will confirm your slot.
+      </p>
+
+      <div className="flex flex-col items-center gap-4 py-2">
+        <img src={whatsappQr} alt="WhatsApp QR code" className="w-56 h-56 rounded-lg border border-gray-200" />
+        <p className="text-sm text-gray-500">Number: {whatsappNumber}</p>
+        <Button
+          asChild
+          className="w-full bg-[#25D366] hover:bg-[#20BA5A] text-black"
+          onClick={() => onSuccess?.()}
+          data-testid="button-whatsapp-booking"
+        >
+          <a href={whatsappLink} target="_blank" rel="noreferrer">
+            Open WhatsApp to Book
+          </a>
         </Button>
-      </form>
-    </Form>
+        <p className="text-xs text-muted-foreground text-center">
+          Prefer calling? Dial {whatsappNumber} and mention you want an orientation call.
+        </p>
+      </div>
+    </div>
   );
 }
 
 // Main Home Page Component
 export default function Home() {
-  const [isDark, setIsDark] = useState(false);
-  
-  useEffect(() => {
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window === "undefined") return false;
     const stored = localStorage.getItem("theme");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const shouldBeDark = stored === "dark" || (!stored && prefersDark);
-    
-    setIsDark(shouldBeDark);
-    document.documentElement.classList.toggle("dark", shouldBeDark);
-  }, []);
+    return stored === "dark" || (!stored && prefersDark);
+  });
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDark);
+  }, [isDark]);
   
   const toggleTheme = () => {
     const newDark = !isDark;

@@ -1,6 +1,7 @@
 "use client";
+/* eslint-disable @next/next/no-img-element */
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { X } from "lucide-react";
 
@@ -14,18 +15,7 @@ export function ImageSlider({ images, fixedCardSize = false }: ImageSliderProps)
   const containerRef = useRef<HTMLDivElement>(null);
   const autoScrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const scroll = (direction: 'left' | 'right') => {
-    if (containerRef.current) {
-      const scrollAmount = 380;
-      containerRef.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth',
-      });
-      resetAutoScroll();
-    }
-  };
-
-  const startAutoScroll = () => {
+  const startAutoScroll = useCallback(() => {
     if (autoScrollIntervalRef.current) clearInterval(autoScrollIntervalRef.current);
     autoScrollIntervalRef.current = setInterval(() => {
       if (containerRef.current) {
@@ -37,19 +27,30 @@ export function ImageSlider({ images, fixedCardSize = false }: ImageSliderProps)
         }
       }
     }, 4000);
-  };
+  }, []);
 
-  const resetAutoScroll = () => {
+  const resetAutoScroll = useCallback(() => {
     if (autoScrollIntervalRef.current) clearInterval(autoScrollIntervalRef.current);
     startAutoScroll();
-  };
+  }, [startAutoScroll]);
+
+  const scroll = useCallback((direction: 'left' | 'right') => {
+    if (containerRef.current) {
+      const scrollAmount = 380;
+      containerRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
+      });
+      resetAutoScroll();
+    }
+  }, [resetAutoScroll]);
 
   useEffect(() => {
     startAutoScroll();
     return () => {
       if (autoScrollIntervalRef.current) clearInterval(autoScrollIntervalRef.current);
     };
-  }, []);
+  }, [startAutoScroll]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -59,7 +60,7 @@ export function ImageSlider({ images, fixedCardSize = false }: ImageSliderProps)
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [scroll]);
 
   return (
     <>

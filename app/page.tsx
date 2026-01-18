@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @next/next/no-img-element */
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
@@ -179,6 +180,9 @@ function Header() {
 // Hero Section Component
 function HeroSection() {
   const [isHeroDialogOpen, setHeroDialogOpen] = useState(false);
+  const whatsappNumber = "+919807612635";
+  const whatsappLink = `https://wa.me/919807612635?text=${encodeURIComponent("Hi Mukul, I'd like to book an orientation call.")}`;
+  const whatsappQr = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(whatsappLink)}`;
   return (
     <section className="relative bg-slate-950 text-white overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-900 to-orange-500/10" />
@@ -240,19 +244,27 @@ function HeroSection() {
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Dialog open={isHeroDialogOpen} onOpenChange={setHeroDialogOpen}>
                 <DialogTrigger asChild>
-                  <Button size="lg" className="text-base px-8 py-6" style={{ color: 'black' }} data-testid="button-book-demo-hero">
-                    <Calendar className="w-5 h-5 mr-2" />
-                    Book a FREE Orientation Call
+                  <Button size="lg" className="text-base px-8 py-6" style={{ color: 'black', backgroundColor: '#25D366' }} data-testid="button-book-demo-hero">
+                    <img src={whatsappIcon} alt="WhatsApp" className="w-5 h-5 mr-2" />
+                    Book a FREE Orientation Call on WhatsApp
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-md">
                   <DialogHeader>
-                    <DialogTitle className="font-heading text-xl">Book Your Free Demo</DialogTitle>
+                    <DialogTitle className="font-heading text-xl">Scan to WhatsApp</DialogTitle>
                     <DialogDescription>
-                      Fill in your details and we'll get back to you within 24 hours.
+                      Scan the QR to message Mukul on WhatsApp or tap the button below.
                     </DialogDescription>
                   </DialogHeader>
-                  <BookDemoForm onSuccess={() => setHeroDialogOpen(false)} />
+                  <div className="flex flex-col items-center gap-4 py-2">
+                    <img src={whatsappQr} alt="WhatsApp QR code" className="w-56 h-56 rounded-lg border border-gray-200" />
+                    <p className="text-sm text-gray-500">Number: {whatsappNumber}</p>
+                    <Button asChild className="bg-[#25D366] hover:bg-[#20BA5A] text-black w-full">
+                      <a href={whatsappLink} target="_blank" rel="noreferrer">
+                        Open WhatsApp Chat
+                      </a>
+                    </Button>
+                  </div>
                 </DialogContent>
               </Dialog>
             </div>
@@ -558,6 +570,9 @@ function CoursesSection() {
 // Meet The Tutor Section
 function MeetTheTutorSection() {
   const [isTutorDialogOpen, setTutorDialogOpen] = useState(false);
+  const whatsappNumber = "+919807612635";
+  const whatsappLink = `https://wa.me/919807612635?text=${encodeURIComponent("Hi Mukul, I'd like to book an orientation call.")}`;
+  const whatsappQr = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(whatsappLink)}`;
   const stats = [
     { label: "Teaching Approach", value: "Concept Clarity & Exam Application" },
     { label: "Students From", value: "120+ USA · UK · UAE · Singapore · India" },
@@ -581,7 +596,7 @@ function MeetTheTutorSection() {
             
             <div className="space-y-4 text-gray-300">
               <p>
-                Hi, I'm Mukul, an online Mathematics tutor and a{" "}
+                Hi, I&apos;m Mukul, an online Mathematics tutor and a{" "}
                 <strong className="text-orange-300">Delhi University alumnus</strong>, working with{" "}
                 <strong className="text-orange-300">CBSE, ICSE, AP, SAT, and US Common Core</strong> students.
                 I focus on building strong fundamentals, clear thinking, and exam-ready problem-solving rather than shortcuts or memorisation.
@@ -604,19 +619,27 @@ function MeetTheTutorSection() {
             
             <Dialog open={isTutorDialogOpen} onOpenChange={setTutorDialogOpen}>
               <DialogTrigger asChild>
-                <Button size="lg" className="bg-white hover:bg-gray-100" style={{ color: 'black' }} data-testid="button-book-demo-tutor">
-                  <Calendar className="w-5 h-5 mr-2" />
-                  Book a FREE Orientation Call
+                <Button size="lg" className="hover:opacity-90" style={{ color: 'black', backgroundColor: '#25D366' }} data-testid="button-book-demo-tutor">
+                  <img src={whatsappIcon} alt="WhatsApp" className="w-5 h-5 mr-2" />
+                  Book a FREE Orientation Call on WhatsApp
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-md">
                 <DialogHeader>
-                  <DialogTitle className="font-heading text-xl">Book Your Free Demo</DialogTitle>
+                  <DialogTitle className="font-heading text-xl">Scan to WhatsApp</DialogTitle>
                   <DialogDescription>
-                    Fill in your details and we'll get back to you within 24 hours.
+                    Scan the QR to message Mukul on WhatsApp or tap the button below.
                   </DialogDescription>
                 </DialogHeader>
-                <BookDemoForm onSuccess={() => setTutorDialogOpen(false)} />
+                <div className="flex flex-col items-center gap-4 py-2">
+                  <img src={whatsappQr} alt="WhatsApp QR code" className="w-56 h-56 rounded-lg border border-gray-200" />
+                  <p className="text-sm text-gray-500">Number: {whatsappNumber}</p>
+                  <Button asChild className="bg-[#25D366] hover:bg-[#20BA5A] text-black w-full">
+                    <a href={whatsappLink} target="_blank" rel="noreferrer">
+                      Open WhatsApp Chat
+                    </a>
+                  </Button>
+                </div>
               </DialogContent>
             </Dialog>
           </div>
@@ -876,7 +899,6 @@ function FAQSection() {
 
 // Final CTA Section
 function FinalCTASection() {
-  const [isFinalDialogOpen, setFinalDialogOpen] = useState(false);
   const [isWhatsAppDialogOpen, setWhatsAppDialogOpen] = useState(false);
   const whatsappNumber = "+919807612635";
   const whatsappLink = `https://wa.me/919807612635?text=${encodeURIComponent("Hi Mukul, I'd like to book an orientation call.")}`;
@@ -891,35 +913,11 @@ function FinalCTASection() {
           Join <span className="text-orange-400 font-semibold text-xl">120+ students</span> who have already transformed their Math performance. Book your orientation call today and take the first step towards exam success.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Dialog open={isFinalDialogOpen} onOpenChange={setFinalDialogOpen}>
-            <DialogTrigger asChild>
-              <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold" data-testid="button-book-demo-cta">
-                <Calendar className="w-5 h-5 mr-2" />
-                Book an Orientation Call
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-md">
-              <DialogHeader>
-                <DialogTitle className="font-heading text-xl">Book Your Free Demo</DialogTitle>
-                <DialogDescription>
-                  Fill in your details and we'll get back to you within 24 hours.
-                </DialogDescription>
-              </DialogHeader>
-              <BookDemoForm onSuccess={() => setFinalDialogOpen(false)} />
-            </DialogContent>
-          </Dialog>
           <Dialog open={isWhatsAppDialogOpen} onOpenChange={setWhatsAppDialogOpen}>
             <DialogTrigger asChild>
-              <Button 
-                size="lg" 
-                variant="ghost" 
-                className="border-0 shadow-md"
-                style={{ backgroundColor: '#25D366', color: 'black' }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#20BA5A'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#25D366'}
-              >
+              <Button size="lg" className="hover:opacity-90 text-black font-semibold" style={{ backgroundColor: '#25D366' }} data-testid="button-book-demo-cta">
                 <img src={whatsappIcon} alt="WhatsApp" className="w-5 h-5 mr-2" />
-                Chat on WhatsApp
+                Book an Orientation Call on WhatsApp
               </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-md">
@@ -980,36 +978,6 @@ function FloatingWhatsAppButton() {
               </a>
             </Button>
           </div>
-        </DialogContent>
-      </Dialog>
-    </div>
-  );
-}
-
-// Floating Demo Booking Button (left)
-function FloatingDemoButton() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <div className="fixed bottom-6 left-6 z-50">
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogTrigger asChild>
-          <button
-            aria-label="Book an orientation call"
-            className="rounded-full shadow-lg border border-orange-500/30"
-            style={{ backgroundColor: '#f97316', color: 'white', padding: '14px' }}
-          >
-            <img src={calendarIcon} alt="Book orientation call" className="w-6 h-6" />
-          </button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle className="font-heading text-xl">Book Your Free Demo</DialogTitle>
-            <DialogDescription>
-              Fill in your details and we'll get back to you within 24 hours.
-            </DialogDescription>
-          </DialogHeader>
-          <BookDemoForm onSuccess={() => setIsOpen(false)} />
         </DialogContent>
       </Dialog>
     </div>
@@ -1211,8 +1179,9 @@ function BookDemoForm({ onSuccess }: { onSuccess?: () => void }) {
           )}
         />
         
-        <Button type="submit" className="w-full" style={{ color: 'black' }} disabled={mutation.isPending} data-testid="button-submit-demo">
-          {mutation.isPending ? "Submitting..." : "Book a FREE Orientation Call"}
+        <Button type="submit" className="w-full" style={{ backgroundColor: '#25D366', color: 'black' }} disabled={mutation.isPending} data-testid="button-submit-demo">
+          <img src={whatsappIcon} alt="WhatsApp" className="w-4 h-4 mr-2" />
+          {mutation.isPending ? "Submitting..." : "Connect on WhatsApp"}
         </Button>
       </form>
     </Form>
@@ -1242,7 +1211,6 @@ export default function Home() {
         <FinalCTASection />
       </main>
       <Footer />
-      <FloatingDemoButton />
       <FloatingWhatsAppButton />
     </div>
   );
